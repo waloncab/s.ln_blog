@@ -11,22 +11,68 @@ import os
 import random
 import string
 
+from shutil import ignore_patterns
+
 directory_path = os.getcwd()
 parent_path = os.path.abspath(os.path.join(directory_path, os.pardir))
 
 print("My current directory is : " + directory_path)
 print("Parent directory is : " + parent_path)
 
-folder_name = os.path.basename(directory_path)
-print("folder_name: " + directory_path)
+# folder_name = os.path.basename(directory_path)
+# print("folder_name: " + directory_path)
 
 src_path = directory_path + "\\_site"
-dst_path = parent_path + "\\s.ln_blog_prod\\_site"
+dst_path = parent_path + "\\s.ln_blog_prod\\"
 
-if os.path.exists(dst_path):
-    shutil.rmtree(dst_path)
+# remove site fodler except .git;
 
-shutil.copytree(src_path, dst_path)
+# ignore=shutil.ignore_patterns('.git*')
+
+# def ignore_full_path_common(dir, files):
+#     if dir == '/.git':
+#         return ['Common']
+#     return []
+
+# necesito recorrerlo de otra forma y analizar subdirecorio (que será mas facil.)
+
+delete_paths = []
+
+print (dst_path)
+
+for entry in os.listdir(dst_path):
+
+    if os.path.isdir(entry):
+
+        print(os.path.basename(entry))
+
+        if os.path.basename(entry) != '.git':
+
+            rm_tree = os.path.join(dst_path, entry)
+
+            print(rm_tree)
+
+            shutil.rmtree(rm_tree)
+            # no puedo eliminiarlo porque lo estoy leyendo a la vez; -> si puedoo
+        else:
+            print('GIT')
+
+    if os.path.isfile(entry):
+
+        rm_tree = os.path.join(dst_path, entry)
+
+        os.remove(rm_tree)
+
+#     if os.path.exists(dst_path):
+#     shutil.rmtree(dst_path)
+
+# if os.path.exists(dst_path):
+#     shutil.rmtree(dst_path)
+
+#mantener .git fuera de la estructura de copia: (y poder no eliminarlo cuando borre los archivos)
+
+#https://pyquestions.com/how-do-i-copy-an-entire-directory-of-files-into-an-existing-directory-using-python
+shutil.copytree(src_path, dst_path, dirs_exist_ok=True) #esto uutlimo funciona en python 3.8; #dirs_exist_ok=True
 
 print('Copied')
 
@@ -49,8 +95,8 @@ repo.git.checkout('master')
 repo.git.add(all=True)
 
 # Check differences between current files and last commit
-diff = repo.git.diff(repo.head.commit.tree)
-print(diff)
+# diff = repo.git.diff(repo.head.commit.tree)
+# print(diff)
 
 # Commit
 repo.index.commit(rand_commit_m)

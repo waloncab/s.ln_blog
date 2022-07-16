@@ -111,7 +111,7 @@
 
       <!-- ELSE show non selected -->
 
-      <a href="https://waloncab.github.io/s.ln_blog//about/">About</a>
+      <a href="/about/">About</a>
     
 
   
@@ -140,7 +140,7 @@
 
       <!-- ELSE show non selected -->
 
-      <a href="https://waloncab.github.io/s.ln_blog//demos/">Demos</a>
+      <a href="/demos/">Demos</a>
     
 
   
@@ -169,7 +169,7 @@
 
       <!-- ELSE show non selected -->
 
-      <a href="https://waloncab.github.io/s.ln_blog//">Home</a>
+      <a href="/">Home</a>
     
 
   
@@ -198,7 +198,7 @@
 
       <!-- ELSE show non selected -->
 
-      <a href="https://waloncab.github.io/s.ln_blog//blog/">Blog</a>
+      <a href="/blog/">Blog</a>
     
 
   
@@ -416,6 +416,15 @@
   window.store = {
 
     
+      "blog-spline-lines-interpolation-2022-07-15-spline-plot-html": {
+        "title": "Plotting Splines",
+        "author": "waloncab",
+        "category": "",
+        "content": "                                                                                ",
+        "url": "/blog/spline/lines/interpolation/2022/07/15/spline_plot.html"
+      }
+      ,
+    
       "demos-audio-visualization-2021-12-05-audio-visualization-003-html": {
         "title": "Audio Visualization sp.002",
         "author": "waloncab",
@@ -521,15 +530,6 @@
         "category": "",
         "content": "In this post we understand how to get a point in a Bezier curve. These curves are about interpolation, the most used ones are cubic bezierssince they can be really good optimized. Given an interpolation parameter t, the coordinates of the respective points can be calculated with a concrete formula.Parameters:  t: the interpolation state [0 - 1]  w: weight values in the same dimensions, all x coordinate values, for example.This simple function returns the point coordinate for the interpolation value.However, notice the output and weights are floats, what means that we are constructing the curve for each coordinate independently, {X, Y, Z}public static float Bezier_3 (float t, float[] w){  if (w.Length != 4) {    throw new ArgumentException (\"List should have 4 points to be a cubic bezier\");  }  float t2 = t * t;  float t3 = t2 * t;  float mt = 1-t;  float mt2 = mt * mt;  float mt3 = mt2 * mt;  return w[0]*mt3 + 3*w[1]*mt2*t + 3* w[2]*mt*t2 + w[3]*t3;}Once the parameters are independent from the world-space, we can better optimize and generate concrete bezier functions for 2D or 3D space. Have a detail look on how the previous function is used to construct the curve for 3D space. Now, if the use case is a simple 2D space, we can remove the correspondent weights from the {Z} coordinate.Notice that a reasonable computation time is saved.public static Vector3 getPoint(List&lt;Vector3&gt; points, float t){  if (points.Count != 4) {    throw new ArgumentException (\"List should have 4 points to be a cubic bezier\");  }  float[] w_x = null; float[] w_y = null; float[] w_z = null;  decompose_weight (points, ref w_x, ref w_y, ref w_z);  float x = Bezier_3(t, w_x);  float y = Bezier_3(t, w_y);  float z = Bezier_3(t, w_z);  return new Vector3 (x, y, z);}The decompose weights instructions just reorganizes the List {X;Y;Z} components intoseparated lists containing the individual space coordinate for each one.",
         "url": "/blog/jekyll/update/spline/2021/11/07/bezier-curves.html"
-      }
-      ,
-    
-      "blog-github-git-jekyll-2021-11-06-jekyll-plugins-github-html": {
-        "title": "Upload jekyll plugins to Github",
-        "author": "waloncab",
-        "category": "",
-        "content": "Lets see how we can use github pages with plugins and what architecture could be needed to do so.So you want to add plugins to jekyll and upload to github pages. This post shows some steps that can be followed to manage different repositories for working with the source and deploying theresult built webpage to gh-pages.Jekyll works great with github pages until you add some native ruby plugins to it. If you are in this scenariothere is only one solution left: build the page locally and after that upload just the /_site folder.In order to adapt to this style of development, we need to work with two repositories or with different branches withinthe same one. Here we cover how to handle the working-code repository and then we create the built /-site repository dynamically with python. This dynamic approach uses a script to get all the commits whenever changes are made to the code and then uploads automatically to github.The python script uses os_system calls to copy the folder structure and then with the GitPython library updates the _site repo.",
-        "url": "/blog/github/git/jekyll/2021/11/06/jekyll-plugins-github.html"
       }
       ,
     
