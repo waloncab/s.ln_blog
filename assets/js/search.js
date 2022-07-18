@@ -5,7 +5,7 @@
     if (results.length) { // Are there any results?
       var appendString = '';
 
-      appendString += '<link rel="stylesheet" href="../assets/css/post.css">';
+      appendString += '<link rel="stylesheet" href="./assets/css/post.css">';
 
       for (var i = 0; i < results.length; i++) {  // Iterate over the results
         var item = store[results[i].ref];
@@ -13,7 +13,7 @@
         // Here needs to embed;
 
         appendString += '<div class="post">';
-        appendString += '<a href="../' + item.url +'">' + item.title + '</a>';
+        appendString += '<a href="./' + item.url +'">' + item.title + '</a>';
         appendString += '<p>'+ '2021-11-20 08:56:49 +0100' + '</p>';
         appendString += '<p>' + item.content.substring(0, 300) + '...</p>';
         appendString += '</div><br>';
