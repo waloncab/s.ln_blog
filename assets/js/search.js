@@ -11,6 +11,7 @@
         var item = store[results[i].ref];
 
         // Here needs to embed;
+        // igual puedo usar el nombre del web directamente en la URL.
 
         appendString += '<div class="post">';
         appendString += '<a href="./' + item.url +'">' + item.title + '</a>';
