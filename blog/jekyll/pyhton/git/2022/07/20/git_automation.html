@@ -103,7 +103,15 @@
     <!-- 'contains' because need to consider paginated urls. -->
 
     
-      <a href="https://waloncab.github.io/s.ln_blog//about/" class="active">About</a>
+
+      <!-- Exclusive if to consider Home page -->
+      <!-- Needs to be here to mathc the nav order -->
+
+      
+
+      <!-- ELSE show non selected -->
+
+      <a href="https://waloncab.github.io/s.ln_blog//about/">About</a>
     
 
   
@@ -182,15 +190,7 @@
     <!-- 'contains' because need to consider paginated urls. -->
 
     
-
-      <!-- Exclusive if to consider Home page -->
-      <!-- Needs to be here to mathc the nav order -->
-
-      
-
-      <!-- ELSE show non selected -->
-
-      <a href="https://waloncab.github.io/s.ln_blog//blog/">Blog</a>
+      <a href="https://waloncab.github.io/s.ln_blog//blog/" class="active">Blog</a>
     
 
   
@@ -407,277 +407,166 @@
 
             <br>
 
-            <p>Working in graphics projects mainly with the Unity 3D engine. Some of the topics I am interested in and spend time researching are:</p>
+            <h1>Git Commit Automation with Python</h1>
+
+<!-- PAGE CATEGORIES -->
+
+<hr>
+
+
+
+    <button type="button" 
+            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=blog';">
+        blog
+    </button> 
+
+
+
+    <button type="button" 
+            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=jekyll';">
+        jekyll
+    </button> 
+
+
+
+    <button type="button" 
+            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=pyhton';">
+        pyhton
+    </button> 
+
+
+
+    <button type="button" 
+            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=git';">
+        git
+    </button> 
+
+
+
+<hr>
+
+<p>This web page is a complex piece of software. There are a few layers that composes the web, having jekyll as the backend and standard html, css, and javascript on the front-end.
+Since jekyll is a lightweight static web page generator, the site has to be built before uploading it to any remote server. This is a very repetitive process that could be automated.
+In this blog post we are going to see a simple way to use git version control from Pyhton and upload the built web-page to github and then enable github-pages.</p>
+
+<p>Steps:</p>
 
 <ul>
-
-    <li> Splines & Bezier Lines</li> 
-    <li> Animation & Kinematics</li> 
-    <li> Procedural content generation</li> 
-    <li> Component architecture</li> 
-    <li> Simple user interface</li> 
-    <li> Data Oriented Design</li> 
-
+  <li>use [ jekyll bundle build ] to build the web page into the _site folder.</li>
+  <li>copy the _site folder to some other folder and start a git repository in there.</li>
+  <li>
+    <p>automate the git commit with the following lines of code.</p>
+  </li>
+  <li>Make sure you have previously installed the corresponding git package into your Pyhton ( use pip install )</li>
 </ul>
 
-<!-- You can find demo videos in [youtube](https://www.youtube.com/channel/UCJX8AUDFcQJMjY1zRivvZqw/videos), some of the playlist you can check:
+<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">    pip install GitPython</code></pre></figure>
 
-* [spline-stuff](https://www.youtube.com/channel/UCJX8AUDFcQJMjY1zRivvZqw/videos)   
-* [endless-procedural](https://www.youtube.com/channel/UCJX8AUDFcQJMjY1zRivvZqw/videos)   
-* [spline-lab](https://www.youtube.com/channel/UCJX8AUDFcQJMjY1zRivvZqw/videos)   
+<p>The following lines specify the basic operations that can be done with your repository. 
+Here, a random word function is being used to generate the commit identification message.</p>
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/) -->
+<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">repo = Repo('/your_site_path')
 
-<hr>
-    <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/playlist.css">
+# list all branches
+for branch in repo.branches:
+    print(branch)
 
-<h3>Welcome to the spline-lab !</h3>
+def randomword(length):
+   letters = string.ascii_lowercase
+   return ''.join(random.choice(letters) for i in range(length))
 
-<p>
-Check out the following <a href="https://youtube.com/playlist?list=PLnQ9Bb3_obbQ_ULwPaLz6DLPPUxc20fHN">playlist</a>  to see what the spline-lab is doing with lines and curves.
-Some of the listed videos contain motion graphics and animations within the lines framework.
-</p>
+rand_commit_m = randomword(8)
+
+# to checkout to a branch:
+repo.git.checkout('master')
+
+# add files
+repo.git.add(all=True)
+
+# check differences between current files and last commit
+diff = repo.git.diff(repo.head.commit.tree)
+
+# commit
+repo.index.commit(rand_commit_m)</code></pre></figure>
+
+
+<!-- INCLUDE spline / procedural -->
 
 
 
-<ul class="images"> 
 
-    <!-- 
 
-        <li>
-            <img src="https://img.youtube.com/vi/bO-P0VUkrek/mqdefault.jpg" alt="icon" height="113" width="200">
-        </li>
+<!-- RELATED POSTS -->
 
-    
+<h3>Related Posts</h3>
 
-        <li>
-            <img src="https://img.youtube.com/vi/C86LMpCzRI4/mqdefault.jpg" alt="icon" height="113" width="200">
-        </li>
 
-    
 
-        <li>
-            <img src="https://img.youtube.com/vi/C86LMpCzRI4/mqdefault.jpg" alt="icon" height="113" width="200">
-        </li>
-
-    
-
-        <li>
-            <img src="https://img.youtube.com/vi/C86LMpCzRI4/mqdefault.jpg" alt="icon" height="113" width="200">
-        </li>
+<div class="child">
 
     
 
-        <li>
-            <img src="https://img.youtube.com/vi/C86LMpCzRI4/mqdefault.jpg" alt="icon" height="113" width="200">
-        </li>
+        <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
+
+<div class="post">
+    <a href="https://waloncab.github.io/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/git_automation.html">Git Commit Automation with Python</a>
+    <p>2022-07-20 17:00:00 +0200</p>
+    <p>This web page is a complex piece of software. There are a few layers that composes the web, having jekyll as the backend and standard html, css, and javascript on the front-end. Since jekyll is a lightweight static web page generator, the site has to be built before uploading it...</p>
+</div>
+            
+        <br>
 
     
 
-        <li>
-            <img src="https://img.youtube.com/vi/C86LMpCzRI4/mqdefault.jpg" alt="icon" height="113" width="200">
-        </li>
+        <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
-     -->
-
-    
-
-        
-
-    
-
-        
+<div class="post">
+    <a href="https://waloncab.github.io/s.ln_blog/blog/spline/lines/interpolation/2022/07/15/spline_plot.html">Plotting Splines</a>
+    <p>2022-07-15 09:56:49 +0200</p>
+    <p>This spline plot has been generated using Plotly. There are many scenarios where a completly graphics engine is not necesary. Static visualization can be accomplished with simple libraries such as this one. Keep in mind what your target platforms for the plots are, and then have a look what fits...</p>
+</div>
+            
+        <br>
 
     
 
-        
+        <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
+
+<div class="post">
+    <a href="https://waloncab.github.io/s.ln_blog/blog/bezier/spline/2021/11/20/Casteljau's-Algorithm.html">Casteljau's Algorithm</a>
+    <p>2021-11-20 08:56:49 +0100</p>
+    <p>Sometimes you need to define n-point curves, and generic bezier may fit your needs in those cases. The following lines of code represent how to design a generic bezier curve, n-grade curve. This algorithm uses recursion to iterate throw the entire interpolation points. Parameters: points: the vector containing the curve...</p>
+</div>
+            
+        <br>
 
     
 
-        
+        <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
-        <li>
-            <a href="https://waloncab.github.io/s.ln_blog/demos/spline/2021/11/25/breath-animation.html">
-                <img src="https://img.youtube.com/vi/qvJVax574-4/mqdefault.jpg" alt="icon" height="113" width="200">
-            </a>
-        </li>
-
-        
-
-    
-
-        
-
-        <li>
-            <a href="https://waloncab.github.io/s.ln_blog/demos/spline/2021/11/25/organic-algorithms.html">
-                <img src="https://img.youtube.com/vi/Qizighc_74Y/mqdefault.jpg" alt="icon" height="113" width="200">
-            </a>
-        </li>
-
-        
+<div class="post">
+    <a href="https://waloncab.github.io/s.ln_blog/blog/software/2021/11/19/DSL-Fluent.html">DSL Fluent</a>
+    <p>2021-11-19 08:56:49 +0100</p>
+    <p>We can define a domain-specific language (DSL) as a programming language specialized to a particular application domain. In this blog post we understand some key concepts and use cases inside the lines framework. An interface was needed for programable movement along lines. In this specific case a custom DSL allows...</p>
+</div>
+            
+        <br>
 
     
 
-        
+        <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
-        <li>
-            <a href="https://waloncab.github.io/s.ln_blog/demos/spline/2021/11/25/motion-graphics.html">
-                <img src="https://img.youtube.com/vi/OeRz6bf5gp8/mqdefault.jpg" alt="icon" height="113" width="200">
-            </a>
-        </li>
-
-        
-
-    
-
-        
-
-        <li>
-            <a href="https://waloncab.github.io/s.ln_blog/demos/spline/procedural/2021/11/25/demo_reel-AAA.html">
-                <img src="https://img.youtube.com/vi/ggb8ZFBzjCs/mqdefault.jpg" alt="icon" height="113" width="200">
-            </a>
-        </li>
-
-        
+<div class="post">
+    <a href="https://waloncab.github.io/s.ln_blog/blog/jekyll/update/bezier/2021/11/13/sLines-lore.html">SLines Reel</a>
+    <p>2021-11-13 08:56:49 +0100</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vulputate, massa quis vestibulum tincidunt, nulla erat ornare dui, vel pharetra erat neque quis ex. Ut quis dictum lorem. Curabitur et varius tellus, eu pulvinar ante.Fusce eget enim vitae diam mollis congue. Sed at aliquam orci, vel placerat tortor. In rutrum...</p>
+</div>
+            
+        <br>
 
     
 
-        
-
-    
-
-        
-
-    
-
-        
-
-    
-
-</ul>
-<hr>
-    <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/playlist.css">
-
-<h3>Procedural Content Generation !</h3>
-
-<p>
-    Some of the procedural content you find in the <a href="https://youtube.com/playlist?list=PLnQ9Bb3_obbQ_ULwPaLz6DLPPUxc20fHN">playlist</a> target 
-    endless generation within the platforms or terrain 2.5D context.
-    Also there is a bunch demos showing simple algorithms to extend lines using random seed approach.
-</p>
-
-
-
-<ul class="images"> 
-
-    
-
-        
-
-    
-
-        
-
-    
-
-        
-
-    
-
-        
-
-    
-
-        
-
-    
-
-        
-
-    
-
-        
-
-        <li>
-            <a href="https://waloncab.github.io/s.ln_blog/demos/spline/procedural/2021/11/25/demo_reel-AAA.html">
-                <img src="https://img.youtube.com/vi/ggb8ZFBzjCs/mqdefault.jpg" alt="icon" height="113" width="200">
-            </a>
-        </li>
-
-        
-
-    
-
-        
-
-        <li>
-            <a href="https://waloncab.github.io/s.ln_blog/demos/procedural/generation/2021/10/14/procedural-terrain-2D-gen.html">
-                <img src="https://img.youtube.com/vi/pztkXGKcxo0/mqdefault.jpg" alt="icon" height="113" width="200">
-            </a>
-        </li>
-
-        
-
-    
-
-        
-
-        <li>
-            <a href="https://waloncab.github.io/s.ln_blog/demos/procedural/generation/2021/10/13/plain-textures-procedural-terrain.html">
-                <img src="https://img.youtube.com/vi/0mUXEIhxy_I/mqdefault.jpg" alt="icon" height="113" width="200">
-            </a>
-        </li>
-
-        
-
-    
-
-        
-
-        <li>
-            <a href="https://waloncab.github.io/s.ln_blog/demos/procedural/generation/2021/10/10/endless-procedural-generation.html">
-                <img src="https://img.youtube.com/vi/Y200qbpGYvo/mqdefault.jpg" alt="icon" height="113" width="200">
-            </a>
-        </li>
-
-        
-
-    
-
-</ul>
-
-<!-- 
-
-    <iframe width="213.3" height="160" 
-            src="https://www.youtube.com/embed/bO-P0VUkrek" 
-            title="Title 01" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-    </iframe>
-
-
-
-    <iframe width="213.3" height="160" 
-            src="https://www.youtube.com/embed/C86LMpCzRI4" 
-            title="Title 02" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-    </iframe>
-
-
-
-    <iframe width="213.3" height="160" 
-            src="https://www.youtube.com/embed/C86LMpCzRI4" 
-            title="Title 03" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-    </iframe>
-
- -->
-<hr>
+</div>
 
             <br>
 

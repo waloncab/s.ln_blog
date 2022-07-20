@@ -1,4 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/" rel="alternate" type="text/html" /><updated>2022-07-19T11:50:19+02:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/feed.xml</id><title type="html">walon/cab:s.ln_blog</title><subtitle>s.Ln-Blog about curved-lines and graphics development. Working with procedural content generation inside the unity-3d game engine. Algorithms for visual arts, check out the spline lab.</subtitle><entry><title type="html">Plotting Splines</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/spline/lines/interpolation/2022/07/15/spline_plot.html" rel="alternate" type="text/html" title="Plotting Splines" /><published>2022-07-15T09:56:49+02:00</published><updated>2022-07-15T09:56:49+02:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/spline/lines/interpolation/2022/07/15/spline_plot</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/spline/lines/interpolation/2022/07/15/spline_plot.html"><![CDATA[<div>                        
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/" rel="alternate" type="text/html" /><updated>2022-07-20T23:02:27+02:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/feed.xml</id><title type="html">walon/cab:s.ln_blog</title><subtitle>s.Ln-Blog about curved-lines and graphics development. Working with procedural content generation inside the unity-3d game engine. Algorithms for visual arts, check out the spline lab.</subtitle><entry><title type="html">Git Commit Automation with Python</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/git_automation.html" rel="alternate" type="text/html" title="Git Commit Automation with Python" /><published>2022-07-20T17:00:00+02:00</published><updated>2022-07-20T17:00:00+02:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/git_automation</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/git_automation.html"><![CDATA[<p>This web page is a complex piece of software. There are a few layers that composes the web, having jekyll as the backend and standard html, css, and javascript on the front-end.
+Since jekyll is a lightweight static web page generator, the site has to be built before uploading it to any remote server. This is a very repetitive process that could be automated.
+In this blog post we are going to see a simple way to use git version control from Pyhton and upload the built web-page to github and then enable github-pages.</p>
+
+<p>Steps:</p>
+
+<ul>
+  <li>use [ jekyll bundle build ] to build the web page into the _site folder.</li>
+  <li>copy the _site folder to some other folder and start a git repository in there.</li>
+  <li>
+    <p>automate the git commit with the following lines of code.</p>
+  </li>
+  <li>Make sure you have previously installed the corresponding git package into your Pyhton ( use pip install )</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">    pip install GitPython</code></pre></figure>
+
+<p>The following lines specify the basic operations that can be done with your repository. 
+Here, a random word function is being used to generate the commit identification message.</p>
+
+<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">repo = Repo('/your_site_path')
+
+# list all branches
+for branch in repo.branches:
+    print(branch)
+
+def randomword(length):
+   letters = string.ascii_lowercase
+   return ''.join(random.choice(letters) for i in range(length))
+
+rand_commit_m = randomword(8)
+
+# to checkout to a branch:
+repo.git.checkout('master')
+
+# add files
+repo.git.add(all=True)
+
+# check differences between current files and last commit
+diff = repo.git.diff(repo.head.commit.tree)
+
+# commit
+repo.index.commit(rand_commit_m)</code></pre></figure>]]></content><author><name>waloncab</name></author><category term="blog" /><category term="jekyll" /><category term="pyhton" /><category term="git" /><summary type="html"><![CDATA[This web page is a complex piece of software. There are a few layers that composes the web, having jekyll as the backend and standard html, css, and javascript on the front-end. Since jekyll is a lightweight static web page generator, the site has to be built before uploading it to any remote server. This is a very repetitive process that could be automated. In this blog post we are going to see a simple way to use git version control from Pyhton and upload the built web-page to github and then enable github-pages. Steps: use [ jekyll bundle build ] to build the web page into the _site folder. copy the _site folder to some other folder and start a git repository in there. automate the git commit with the following lines of code. Make sure you have previously installed the corresponding git package into your Pyhton ( use pip install ) pip install GitPython The following lines specify the basic operations that can be done with your repository. Here, a random word function is being used to generate the commit identification message. repo = Repo('/your_site_path') # list all branches for branch in repo.branches: print(branch) def randomword(length): letters = string.ascii_lowercase return ''.join(random.choice(letters) for i in range(length)) rand_commit_m = randomword(8) # to checkout to a branch: repo.git.checkout('master') # add files repo.git.add(all=True) # check differences between current files and last commit diff = repo.git.diff(repo.head.commit.tree) # commit repo.index.commit(rand_commit_m)]]></summary></entry><entry><title type="html">Plotting Splines</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/spline/lines/interpolation/2022/07/15/spline_plot.html" rel="alternate" type="text/html" title="Plotting Splines" /><published>2022-07-15T09:56:49+02:00</published><updated>2022-07-15T09:56:49+02:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/spline/lines/interpolation/2022/07/15/spline_plot</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/spline/lines/interpolation/2022/07/15/spline_plot.html"><![CDATA[<div>                        
         <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
         <script src="https://cdn.plot.ly/plotly-2.12.1.min.js"></script>                
         <div id="548b1779-dc2c-4101-9c59-907e69a2822c" class="plotly-graph-div" style="height:100%; width:100%;"></div>            
@@ -19,7 +61,10 @@ not just a simple mesh but a line renderer to distinguish the contour of the sha
 The drums make the shape generate aggressive but very pleasant curves.</p>]]></content><author><name>waloncab</name></author><category term="demos" /><category term="audio" /><category term="visualization" /><summary type="html"><![CDATA[Everything you see in the video is generated at run-time. This time the audio visualizer uses not just a simple mesh but a line renderer to distinguish the contour of the shape. The drums make the shape generate aggressive but very pleasant curves.]]></summary></entry><entry><title type="html">Audio Visualization sp.001</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/audio/visualization/2021/12/03/audio-visualization-001.html" rel="alternate" type="text/html" title="Audio Visualization sp.001" /><published>2021-12-03T10:44:49+01:00</published><updated>2021-12-03T10:44:49+01:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/audio/visualization/2021/12/03/audio-visualization-001</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/audio/visualization/2021/12/03/audio-visualization-001.html"><![CDATA[<p>This video demonstrates how frequency bands can be used to make dynamic meshes. 
 The mesh is modified at real-time by a redial disposition of those bands.
 Notice that the code for this representation is being optimized since modifying a mesh every frame 
-is an expensive task no matter how simple the mesh might be.</p>]]></content><author><name>waloncab</name></author><category term="demos" /><category term="audio" /><category term="visualization" /><summary type="html"><![CDATA[This video demonstrates how frequency bands can be used to make dynamic meshes. The mesh is modified at real-time by a redial disposition of those bands. Notice that the code for this representation is being optimized since modifying a mesh every frame is an expensive task no matter how simple the mesh might be.]]></summary></entry><entry><title type="html">Reel Showcase</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/breath-animation.html" rel="alternate" type="text/html" title="Reel Showcase" /><published>2021-11-25T10:44:49+01:00</published><updated>2021-11-25T10:44:49+01:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/breath-animation</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/breath-animation.html"><![CDATA[<p>This time with breathing graphics, real time parallel processing for dynamic spline follow.
+is an expensive task no matter how simple the mesh might be.</p>]]></content><author><name>waloncab</name></author><category term="demos" /><category term="audio" /><category term="visualization" /><summary type="html"><![CDATA[This video demonstrates how frequency bands can be used to make dynamic meshes. The mesh is modified at real-time by a redial disposition of those bands. Notice that the code for this representation is being optimized since modifying a mesh every frame is an expensive task no matter how simple the mesh might be.]]></summary></entry><entry><title type="html">Reel Showcase</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/procedural/2021/11/25/demo_reel-AAA.html" rel="alternate" type="text/html" title="Reel Showcase" /><published>2021-11-25T10:44:49+01:00</published><updated>2021-11-25T10:44:49+01:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/procedural/2021/11/25/demo_reel-AAA</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/procedural/2021/11/25/demo_reel-AAA.html"><![CDATA[<p>
+This video shows how the project is growing. Traversing splines in real time is hard, it takes certain amount of computational effort.
+So in order to handle all of this movement without lag, a parallel approach has been introduced to certain algorithms.
+</p>]]></content><author><name>waloncab</name></author><category term="demos" /><category term="spline" /><category term="procedural" /><summary type="html"><![CDATA[This video shows how the project is growing. Traversing splines in real time is hard, it takes certain amount of computational effort. So in order to handle all of this movement without lag, a parallel approach has been introduced to certain algorithms.]]></summary></entry><entry><title type="html">Reel Showcase</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/breath-animation.html" rel="alternate" type="text/html" title="Reel Showcase" /><published>2021-11-25T10:44:49+01:00</published><updated>2021-11-25T10:44:49+01:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/breath-animation</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/breath-animation.html"><![CDATA[<p>This time with breathing graphics, real time parallel processing for dynamic spline follow.
 Closed loop behavior algorithm allows to follow any closed line shape at a constant speed. 
 One big challenge is keep the iteration distance independent from the actual spline path that we’re iterating through.</p>
 
@@ -34,10 +79,7 @@ One big challenge is keep the iteration distance independent from the actual spl
     ollowing path behavior within procedural line animations to make pleasant effects.
 </p>
 
-<!--more-->]]></content><author><name>waloncab</name></author><category term="demos" /><category term="spline" /><summary type="html"><![CDATA[Scaling the project to handle different types of lines and the technology around them. ollowing path behavior within procedural line animations to make pleasant effects.]]></summary></entry><entry><title type="html">Reel Showcase</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/procedural/2021/11/25/demo_reel-AAA.html" rel="alternate" type="text/html" title="Reel Showcase" /><published>2021-11-25T10:44:49+01:00</published><updated>2021-11-25T10:44:49+01:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/procedural/2021/11/25/demo_reel-AAA</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/procedural/2021/11/25/demo_reel-AAA.html"><![CDATA[<p>
-This video shows how the project is growing. Traversing splines in real time is hard, it takes certain amount of computational effort.
-So in order to handle all of this movement without lag, a parallel approach has been introduced to certain algorithms.
-</p>]]></content><author><name>waloncab</name></author><category term="demos" /><category term="spline" /><category term="procedural" /><summary type="html"><![CDATA[This video shows how the project is growing. Traversing splines in real time is hard, it takes certain amount of computational effort. So in order to handle all of this movement without lag, a parallel approach has been introduced to certain algorithms.]]></summary></entry><entry><title type="html">Casteljau’s Algorithm</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/bezier/spline/2021/11/20/Casteljau's-Algorithm.html" rel="alternate" type="text/html" title="Casteljau’s Algorithm" /><published>2021-11-20T08:56:49+01:00</published><updated>2021-11-20T08:56:49+01:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/bezier/spline/2021/11/20/Casteljau&apos;s%20Algorithm</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/bezier/spline/2021/11/20/Casteljau&apos;s-Algorithm.html"><![CDATA[<p>Sometimes you need to define n-point curves, and generic bezier may fit your needs in those cases.
+<!--more-->]]></content><author><name>waloncab</name></author><category term="demos" /><category term="spline" /><summary type="html"><![CDATA[Scaling the project to handle different types of lines and the technology around them. ollowing path behavior within procedural line animations to make pleasant effects.]]></summary></entry><entry><title type="html">Casteljau’s Algorithm</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/bezier/spline/2021/11/20/Casteljau's-Algorithm.html" rel="alternate" type="text/html" title="Casteljau’s Algorithm" /><published>2021-11-20T08:56:49+01:00</published><updated>2021-11-20T08:56:49+01:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/bezier/spline/2021/11/20/Casteljau&apos;s%20Algorithm</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/bezier/spline/2021/11/20/Casteljau&apos;s-Algorithm.html"><![CDATA[<p>Sometimes you need to define n-point curves, and generic bezier may fit your needs in those cases.
 The following lines of code represent how to design a generic bezier curve, n-grade curve.
 This algorithm uses recursion to iterate throw the entire interpolation points.</p>
 
@@ -65,80 +107,4 @@ on the number of points the curve is defined.</p>
   <span class="p">}</span>
 
   <span class="k">return</span> <span class="nf">getPoint_R</span> <span class="p">(</span><span class="n">recursive_call</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
-<span class="p">}</span></code></pre></figure>]]></content><author><name>waloncab</name></author><category term="blog" /><category term="bezier" /><category term="spline" /><summary type="html"><![CDATA[Sometimes you need to define n-point curves, and generic bezier may fit your needs in those cases. The following lines of code represent how to design a generic bezier curve, n-grade curve. This algorithm uses recursion to iterate throw the entire interpolation points.]]></summary></entry><entry><title type="html">DSL Fluent</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/software/2021/11/19/DSL-Fluent.html" rel="alternate" type="text/html" title="DSL Fluent" /><published>2021-11-19T08:56:49+01:00</published><updated>2021-11-19T08:56:49+01:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/software/2021/11/19/DSL-Fluent</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/software/2021/11/19/DSL-Fluent.html"><![CDATA[<p>We can define a domain-specific language (DSL) as a programming language specialized to a particular application domain.
-In this blog post we understand some key concepts and use cases inside the lines framework.</p>
-
-<p>An interface was needed for programable movement along lines. In this specific case a custom DSL
-allows to program simple instructions without understanding any of the inner working of the framework.</p>
-
-<p>There is a sharp definition between the general purpose language that host the framework and the
-domain specific language stored in scripts that can later be process. Encapsulating instructions in scripts 
-make this kind of code highly reusable along different components.</p>
-
-<p>We are using an expression builder to construct the graph that represents a movement state machine.
-In this case we are not working with simple value assignments or defined instructions. 
-The DSL represents a complex data structure, expression builders need to be defined 
-for each new sentence.</p>
-
-<p>Lets analyze a fluent API and the elements we are using here.</p>
-
-<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="n">ExpressionBuilder</span> <span class="n">builder</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">();</span>
-
-<span class="n">builder</span><span class="p">.</span><span class="nf">loop</span><span class="p">()</span>
-            <span class="p">.</span><span class="nf">times</span><span class="p">(</span><span class="m">5</span><span class="p">)</span>
-            <span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">()</span>
-                <span class="p">.</span><span class="nf">sequence</span><span class="p">()</span>
-                    <span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">().</span><span class="n">terminal</span><span class="p">&lt;</span><span class="n">MoveBuilder</span><span class="p">&gt;()</span>
-                            <span class="p">.</span><span class="nf">distance</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
-                        <span class="p">.</span><span class="nf">move_end</span><span class="p">()</span>
-                    <span class="p">)</span>
-                    <span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">().</span><span class="n">terminal</span><span class="p">&lt;</span><span class="n">MoveBuilder</span><span class="p">&gt;()</span>
-                            <span class="p">.</span><span class="nf">min</span><span class="p">(-</span><span class="m">5</span><span class="p">)</span>
-                            <span class="p">.</span><span class="nf">max</span><span class="p">(</span><span class="m">5</span><span class="p">)</span>
-                        <span class="p">.</span><span class="nf">move_end</span><span class="p">()</span>
-                    <span class="p">)</span>
-                    <span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">()</span>
-                        <span class="p">.</span><span class="nf">decide</span><span class="p">()</span>
-                            <span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="m">0.3f</span><span class="p">,</span> <span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">().</span><span class="n">terminal</span><span class="p">&lt;</span><span class="n">MoveBuilder</span><span class="p">&gt;()</span>
-                                    <span class="p">.</span><span class="nf">min</span><span class="p">(-</span><span class="m">8</span><span class="p">)</span>
-                                    <span class="p">.</span><span class="nf">max</span><span class="p">(</span><span class="m">8</span><span class="p">)</span>
-                                <span class="p">.</span><span class="nf">move_end</span><span class="p">()</span>
-                            <span class="p">)</span>
-                            <span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="m">0.7f</span><span class="p">,</span> <span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">().</span><span class="n">terminal</span><span class="p">&lt;</span><span class="n">MoveBuilder</span><span class="p">&gt;()</span>
-                                    <span class="p">.</span><span class="nf">distance</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>
-                                <span class="p">.</span><span class="nf">move_end</span><span class="p">()</span>
-                            <span class="p">)</span>
-                        <span class="p">.</span><span class="nf">decide_end</span><span class="p">()</span>
-                    <span class="p">)</span>
-                <span class="p">.</span><span class="nf">sequence_end</span><span class="p">()</span>
-            <span class="p">)</span>
-        <span class="p">.</span><span class="nf">loop_end</span><span class="p">()</span>
-    <span class="p">.</span><span class="nf">end</span><span class="p">();</span>
-
-<span class="k">return</span> <span class="n">builder</span><span class="p">.</span><span class="nf">Generate</span><span class="p">();</span></code></pre></figure>
-
-<p>This expression tree builds a complex graph State-Machine.
-The fluent interface allows to link instructions in a natural expressive way.
-Notice the difference between the terminal and non-terminal expressions.</p>
-
-<ul>
-  <li>
-    <p>Terminal:
-  Represent the behavior we want to add to the graph.</p>
-  </li>
-  <li>
-    <p>Non-Terminal:
-  Integrate flow control with elements such as loop, sequences and decisions.</p>
-  </li>
-</ul>
-
-<p>Fluent APIs are popular among DSL, according to Wikipedia a fluent API is a way of implementing 
-object oriented code with a more natural and human readable interface. 
-Method chaining is used to relay the instruction context of a subsequent expression.
-But there are more elements to consider in those concrete languages.</p>
-
-<ul>
-  <li>Method Chaining</li>
-  <li>Method Cascading</li>
-  <li>Progressive Interfaces</li>
-</ul>]]></content><author><name>waloncab</name></author><category term="blog" /><category term="software" /><summary type="html"><![CDATA[We can define a domain-specific language (DSL) as a programming language specialized to a particular application domain. In this blog post we understand some key concepts and use cases inside the lines framework.]]></summary></entry></feed>
+<span class="p">}</span></code></pre></figure>]]></content><author><name>waloncab</name></author><category term="blog" /><category term="bezier" /><category term="spline" /><summary type="html"><![CDATA[Sometimes you need to define n-point curves, and generic bezier may fit your needs in those cases. The following lines of code represent how to design a generic bezier curve, n-grade curve. This algorithm uses recursion to iterate throw the entire interpolation points.]]></summary></entry></feed>

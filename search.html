@@ -358,6 +358,18 @@
   
 
   
+
+    <!-- Delete all pagination from index -->
+
+    
+      
+
+  <!-- VARIABLES -->
+
+  
+  
+
+  
   
 
 
@@ -416,6 +428,15 @@
 <script>
   window.store = {
 
+    
+      "blog-jekyll-pyhton-git-2022-07-20-git-automation-html": {
+        "title": "Git Commit Automation with Python",
+        "author": "waloncab",
+        "category": "",
+        "content": "This web page is a complex piece of software. There are a few layers that composes the web, having jekyll as the backend and standard html, css, and javascript on the front-end.Since jekyll is a lightweight static web page generator, the site has to be built before uploading it to any remote server. This is a very repetitive process that could be automated.In this blog post we are going to see a simple way to use git version control from Pyhton and upload the built web-page to github and then enable github-pages.Steps:  use [ jekyll bundle build ] to build the web page into the _site folder.  copy the _site folder to some other folder and start a git repository in there.      automate the git commit with the following lines of code.    Make sure you have previously installed the corresponding git package into your Pyhton ( use pip install )    pip install GitPythonThe following lines specify the basic operations that can be done with your repository. Here, a random word function is being used to generate the commit identification message.repo = Repo('/your_site_path')# list all branchesfor branch in repo.branches:    print(branch)def randomword(length):   letters = string.ascii_lowercase   return ''.join(random.choice(letters) for i in range(length))rand_commit_m = randomword(8)# to checkout to a branch:repo.git.checkout('master')# add filesrepo.git.add(all=True)# check differences between current files and last commitdiff = repo.git.diff(repo.head.commit.tree)# commitrepo.index.commit(rand_commit_m)",
+        "url": "/blog/jekyll/pyhton/git/2022/07/20/git_automation.html"
+      }
+      ,
     
       "blog-spline-lines-interpolation-2022-07-15-spline-plot-html": {
         "title": "Plotting Splines",
