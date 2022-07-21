@@ -362,6 +362,18 @@
   
 
   
+
+    <!-- Delete all pagination from index -->
+
+    
+      
+
+  <!-- VARIABLES -->
+
+  
+  
+
+  
   
 
 
@@ -407,7 +419,7 @@
 
             <br>
 
-            <h1>Plotting Splines</h1>
+            <h1>Plotting Splines with Plotly and export into HTML</h1>
 
 <!-- PAGE CATEGORIES -->
 
@@ -460,6 +472,27 @@
     <p>
         Keep in mind what your target platforms for the plots are, and then have a look what fits your project best. In this case plotly instead of matplotlib or seaborn, allow simple html export with the full plotting toolbar. This small features make a difference when it comes to the export, have a look at the <a href="https://plotly.com/python/interactive-html-export/"> documentation</a>
     </p>
+
+    <p>
+        <figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">        import plotly.express as px
+        
+        fig = px.line(
+            x = np.squeeze(np.asarray(X)), 
+            y = np.squeeze(np.asarray(Y))
+            )
+
+        # scale the axis properly
+
+        fig.update_yaxes(
+            scaleanchor = "x",
+            scaleratio = 1,
+        )
+        
+        fig.show()
+
+        </code></pre></figure>
+    </p>
+
 
 <!-- INCLUDE spline / procedural -->
 
@@ -611,6 +644,18 @@ Some of the listed videos contain motion graphics and animations within the line
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
+    <a href="https://waloncab.github.io/s.ln_blog/blog/2022/07/21/matrix_transformations.html">Matrix_transformations</a>
+    <p>2022-07-21 00:00:00 +0200</p>
+    <p></p>
+</div>
+            
+        <br>
+
+    
+
+        <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
+
+<div class="post">
     <a href="https://waloncab.github.io/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/git_automation.html">Git Commit Automation with Python</a>
     <p>2022-07-20 17:00:00 +0200</p>
     <p>This web page is a complex piece of software. There are a few layers that composes the web, having jekyll as the backend and standard html, css, and javascript on the front-end. Since jekyll is a lightweight static web page generator, the site has to be built before uploading it...</p>
@@ -623,7 +668,7 @@ Some of the listed videos contain motion graphics and animations within the line
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/spline/lines/interpolation/2022/07/15/spline_plot.html">Plotting Splines</a>
+    <a href="https://waloncab.github.io/s.ln_blog/blog/spline/lines/interpolation/2022/07/15/spline_plot.html">Plotting Splines with Plotly and export into HTML</a>
     <p>2022-07-15 09:56:49 +0200</p>
     <p>This spline plot has been generated using Plotly. There are many scenarios where a completly graphics engine is not necesary. Static visualization can be accomplished with simple libraries such as this one. Keep in mind what your target platforms for the plots are, and then have a look what fits...</p>
 </div>
@@ -650,18 +695,6 @@ Some of the listed videos contain motion graphics and animations within the line
     <a href="https://waloncab.github.io/s.ln_blog/blog/software/2021/11/19/DSL-Fluent.html">DSL Fluent</a>
     <p>2021-11-19 08:56:49 +0100</p>
     <p>We can define a domain-specific language (DSL) as a programming language specialized to a particular application domain. In this blog post we understand some key concepts and use cases inside the lines framework. An interface was needed for programable movement along lines. In this specific case a custom DSL allows...</p>
-</div>
-            
-        <br>
-
-    
-
-        <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
-
-<div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/jekyll/update/bezier/2021/11/13/sLines-lore.html">SLines Reel</a>
-    <p>2021-11-13 08:56:49 +0100</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vulputate, massa quis vestibulum tincidunt, nulla erat ornare dui, vel pharetra erat neque quis ex. Ut quis dictum lorem. Curabitur et varius tellus, eu pulvinar ante.Fusce eget enim vitae diam mollis congue. Sed at aliquam orci, vel placerat tortor. In rutrum...</p>
 </div>
             
         <br>
@@ -716,7 +749,7 @@ Some of the listed videos contain motion graphics and animations within the line
         </div>
 
         <div class="item2">
-            <p class="right">s.Ln-Blog about curved-lines and graphics development. Working with procedural content generation inside the unity-3d game engine. Algorithms for visual arts, check out the spline lab.</p>
+            <p class="right">Graphics rendering and spline algorithms. Kinematics from the bezier curves by  traversing generated paths, then embedding them into rendering and game engines. Stay tunned for the Spline Lab!</p>
 
             <p align="center">
                 &copy; 2021 Walon Cab

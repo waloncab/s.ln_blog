@@ -377,6 +377,15 @@
   
 
 
+  <!-- VARIABLES -->
+
+  
+  
+
+  
+  
+
+
 <!-- ASSIGN -->
 
 
@@ -419,163 +428,192 @@
 
             <br>
 
-            <h1>Git Commit Automation with Python</h1>
-
-<!-- PAGE CATEGORIES -->
+            <h2>Posts</h2>
 
 <hr>
 
+    
 
+        <button type="button" 
+                onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=demos';">
+            demos
+        </button> 
 
-    <button type="button" 
-            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=blog';">
-        blog
-    </button> 
+    
 
+        <button type="button" 
+                onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=procedural';">
+            procedural
+        </button> 
 
+    
 
-    <button type="button" 
-            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=jekyll';">
-        jekyll
-    </button> 
+        <button type="button" 
+                onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=generation';">
+            generation
+        </button> 
 
+    
 
+        <button type="button" 
+                onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=blog';">
+            blog
+        </button> 
 
-    <button type="button" 
-            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=pyhton';">
-        pyhton
-    </button> 
+    
 
+        <button type="button" 
+                onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=spline';">
+            spline
+        </button> 
 
+    
 
-    <button type="button" 
-            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=git';">
-        git
-    </button> 
+        <button type="button" 
+                onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=lines';">
+            lines
+        </button> 
 
+    
 
+        <button type="button" 
+                onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=interpolation';">
+            interpolation
+        </button> 
+
+    
+
+        <button type="button" 
+                onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=jekyll';">
+            jekyll
+        </button> 
+
+    
+
+        <button type="button" 
+                onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=update';">
+            update
+        </button> 
+
+    
+
+        <button type="button" 
+                onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=bezier';">
+            bezier
+        </button> 
+
+    
+
+        <button type="button" 
+                onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=software';">
+            software
+        </button> 
+
+    
+
+        <button type="button" 
+                onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=audio';">
+            audio
+        </button> 
+
+    
+
+        <button type="button" 
+                onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=visualization';">
+            visualization
+        </button> 
+
+    
+
+        <button type="button" 
+                onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=pyhton';">
+            pyhton
+        </button> 
+
+    
+
+        <button type="button" 
+                onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=git';">
+            git
+        </button> 
+
+    
 
 <hr>
 
-<p>This web page is a complex piece of software. There are a few layers that composes the web, having jekyll as the backend and standard html, css, and javascript on the front-end.
-Since jekyll is a lightweight static web page generator, the site has to be built before uploading it to any remote server. This is a very repetitive process that could be automated.
-In this blog post we are going to see a simple way to use git version control from Pyhton and upload the built web-page to github and then enable github-pages.</p>
-
-<p>Steps:</p>
-
-<ul>
-  <li>use [ jekyll bundle build ] to build the web page into the _site folder.</li>
-  <li>copy the _site folder to some other folder and start a git repository in there.</li>
-  <li>automate the git commit with the following lines of code.</li>
-</ul>
-
-<p>Make sure you have previously installed the corresponding git package into your Pyhton ( use pip install )</p>
-
-<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">    pip install GitPython</code></pre></figure>
-
-<p>The following lines specify the basic operations that can be done with your repository. 
-Here, a random word function is being used to generate the commit identification message.</p>
-
-<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">repo = Repo('/your_site_path')
-
-# list all branches
-for branch in repo.branches:
-    print(branch)
-
-def randomword(length):
-   letters = string.ascii_lowercase
-   return ''.join(random.choice(letters) for i in range(length))
-
-rand_commit_m = randomword(8)
-
-# to checkout to a branch:
-repo.git.checkout('master')
-
-# add files
-repo.git.add(all=True)
-
-# check differences between current files and last commit
-diff = repo.git.diff(repo.head.commit.tree)
-
-# commit
-repo.index.commit(rand_commit_m)</code></pre></figure>
-
-
-<!-- INCLUDE spline / procedural -->
-
-
-
-
-
-<!-- RELATED POSTS -->
-
-<h3>Related Posts</h3>
-
-
+<br>
 
 <div class="child">
 
     
 
-        <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
+            <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/2022/07/21/matrix_transformations.html">Matrix_transformations</a>
-    <p>2022-07-21 00:00:00 +0200</p>
-    <p></p>
+    <a href="https://waloncab.github.io/s.ln_blog/blog/spline/lines/interpolation/2021/11/06/interpolation-spline.html">Interpoaltion in Graphics</a>
+    <p>2021-11-06 08:56:49 +0100</p>
+    <p>What traversing splines looks like? Interpolation in one of the core features of graphics development, you have it almost in every small tool that the game engine contains. Within the spline framework a linear interpolation is used to traverse shapes. Lets see some of the most relevant types of interpolation:...</p>
 </div>
-            
-        <br>
+
+            <br>
 
     
 
-        <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
+    <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/paginate.css">
 
-<div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/git_automation.html">Git Commit Automation with Python</a>
-    <p>2022-07-20 17:00:00 +0200</p>
-    <p>This web page is a complex piece of software. There are a few layers that composes the web, having jekyll as the backend and standard html, css, and javascript on the front-end. Since jekyll is a lightweight static web page generator, the site has to be built before uploading it...</p>
-</div>
+
+
+    <div class="pages_nav">
+
+        
+
+            <a href="https://waloncab.github.io/s.ln_blog/blog//page3/">
+                <button><</button>
+            </a> 
+
+        
+
+        
+
             
-        <br>
-
-    
-
-        <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
-
-<div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/spline/lines/interpolation/2022/07/15/spline_plot.html">Plotting Splines with Plotly and export into HTML</a>
-    <p>2022-07-15 09:56:49 +0200</p>
-    <p>This spline plot has been generated using Plotly. There are many scenarios where a completly graphics engine is not necesary. Static visualization can be accomplished with simple libraries such as this one. Keep in mind what your target platforms for the plots are, and then have a look what fits...</p>
-</div>
+                <a href="https://waloncab.github.io/s.ln_blog/blog/">
+                    <button>1</button>
+                </a>
             
-        <br>
 
-    
+        
 
-        <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
-
-<div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/bezier/spline/2021/11/20/Casteljau's-Algorithm.html">Casteljau's Algorithm</a>
-    <p>2021-11-20 08:56:49 +0100</p>
-    <p>Sometimes you need to define n-point curves, and generic bezier may fit your needs in those cases. The following lines of code represent how to design a generic bezier curve, n-grade curve. This algorithm uses recursion to iterate throw the entire interpolation points. Parameters: points: the vector containing the curve...</p>
-</div>
             
-        <br>
-
-    
-
-        <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
-
-<div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/software/2021/11/19/DSL-Fluent.html">DSL Fluent</a>
-    <p>2021-11-19 08:56:49 +0100</p>
-    <p>We can define a domain-specific language (DSL) as a programming language specialized to a particular application domain. In this blog post we understand some key concepts and use cases inside the lines framework. An interface was needed for programable movement along lines. In this specific case a custom DSL allows...</p>
-</div>
+                <a href="https://waloncab.github.io/s.ln_blog/blog/page2">
+                    <button>2</button>
+                </a>
             
-        <br>
 
-    
+        
+
+            
+                <a href="https://waloncab.github.io/s.ln_blog/blog/page3">
+                    <button>3</button>
+                </a>
+            
+
+        
+
+            
+                <button>4</button>
+            
+
+        
+
+        <!-- <button>1</button>
+        <button>2</button>
+        <button>3</button> -->
+
+        
+
+    </div>
+
+
 
 </div>
 
