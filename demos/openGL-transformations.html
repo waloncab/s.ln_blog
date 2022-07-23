@@ -441,7 +441,7 @@
 
             <br>
 
-            <h1>Audio Visualization sp.002</h1>
+            <h1>Spline Transformations - Rendering OpenGL</h1>
 
 <!-- PAGE CATEGORIES -->
 
@@ -457,24 +457,29 @@
 
 
     <button type="button" 
-            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=audio';">
-        audio
-    </button> 
-
-
-
-    <button type="button" 
             onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=visualization';">
         visualization
     </button> 
 
 
 
+    <button type="button" 
+            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=openGL';">
+        openGL
+    </button> 
+
+
+
 <hr>
 
-<p>Everything you see in the video is generated at run-time. This time the audio visualizer uses 
-not just a simple mesh but a line renderer to distinguish the contour of the shape.
-The drums make the shape generate aggressive but very pleasant curves.</p>
+<p>Rendering a spline shape with a dedicated graphics engine written in Python.
+The scene graph architecture allows to create a custom spline-shape geometry and
+then locally transform the entire object with the disered operations.
+All matrix and vector operations are abstracted by the framework, 
+allowing to translate, rotate and scale from well-defined methods. 
+The stored model matrices are prepared to work with global and local transformations.
+Read the following post to deeply understand how matrix transformations works:
+<a href="https://waloncab.github.io/s.ln_blog/posts/matrix_transformations.html">Matrix Transformations for Rendering 3D Objects</a></p>
 
 
 <div class="your-centered-div">
@@ -482,7 +487,7 @@ The drums make the shape generate aggressive but very pleasant curves.</p>
     <!-- // page works -->
 
     <iframe width="560" height="315" 
-        src="https://www.youtube.com/embed/umaPY4YpS-c" 
+        src="https://www.youtube.com/embed/HO34GNlTT1E" 
         title="YouTube video player" 
         frameborder="0" 
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -510,7 +515,7 @@ The drums make the shape generate aggressive but very pleasant curves.</p>
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/demos/visualization/opengl/2022/07/22/openGL-transformations.html">Spline Transformations - Rendering OpenGL</a>
+    <a href="https://waloncab.github.io/s.ln_blog/demos/openGL-transformations.html">Spline Transformations - Rendering OpenGL</a>
     <p>2022-07-22 16:20:00 +0200</p>
     <p>Rendering a spline shape with a dedicated graphics engine written in Python. The scene graph architecture allows to create a custom spline-shape geometry and then locally transform the entire object with the disered operations. All matrix and vector operations are abstracted by the framework, allowing to translate, rotate and scale...</p>
 </div>
@@ -522,11 +527,12 @@ The drums make the shape generate aggressive but very pleasant curves.</p>
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/demos/audio/visualization/2021/12/05/audio-visualization-003.html">Audio Visualization sp.002</a>
+    <a href="https://waloncab.github.io/s.ln_blog/demos/audio-visualization-003.html">Audio Visualization sp.002</a>
     <p>2021-12-05 10:44:49 +0100</p>
     <p>Piano key strokes are more fun when you visualize in some form or another the sound produced.
 Closed spline shape rendered along this small piano track, notice the small fast waves the contour forms.
-Very pleasant effect that could be applied to many more music tracks like this.</p>
+Very pleasant effect that could be applied to many more music tracks like this.
+</p>
 </div>
             
         <br>
@@ -536,7 +542,7 @@ Very pleasant effect that could be applied to many more music tracks like this.<
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/demos/audio/visualization/2021/12/04/audio-visualization-002.html">Audio Visualization sp.002</a>
+    <a href="https://waloncab.github.io/s.ln_blog/demos/audio-visualization-002.html">Audio Visualization sp.002</a>
     <p>2021-12-04 10:44:49 +0100</p>
     <p>Everything you see in the video is generated at run-time. This time the audio visualizer uses 
 not just a simple mesh but a line renderer to distinguish the contour of the shape.
@@ -551,7 +557,7 @@ The drums make the shape generate aggressive but very pleasant curves.
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/demos/audio/visualization/2021/12/03/audio-visualization-001.html">Audio Visualization sp.001</a>
+    <a href="https://waloncab.github.io/s.ln_blog/demos/audio-visualization-001.html">Audio Visualization sp.001</a>
     <p>2021-12-03 10:44:49 +0100</p>
     <p>This video demonstrates how frequency bands can be used to make dynamic meshes. The mesh is modified at real-time by a redial disposition of those bands. Notice that the code for this representation is being optimized since modifying a mesh every frame is an expensive task no matter how simple...</p>
 </div>
@@ -563,7 +569,7 @@ The drums make the shape generate aggressive but very pleasant curves.
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/demos/spline/2021/11/25/breath-animation.html">Reel Showcase</a>
+    <a href="https://waloncab.github.io/s.ln_blog/demos/breath-animation.html">Reel Showcase</a>
     <p>2021-11-25 10:44:49 +0100</p>
     <p>This time with breathing graphics, real time parallel processing for dynamic spline follow. Closed loop behavior algorithm allows to follow any closed line shape at a constant speed. One big challenge is keep the iteration distance independent from the actual spline path that we’re iterating through. Stay tuned for more...</p>
 </div>

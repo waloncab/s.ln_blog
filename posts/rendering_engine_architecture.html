@@ -487,6 +487,54 @@
 
 <hr>
 
+<ul>
+  <li>
+    <p>graphics library vs rendering engine</p>
+
+    <p>OpenGL is a graphics library with many functions for drawing complex geometries based on more simple geometry primitives such as points, lines and triangles. 
+  A rendering engine is a well defined framework that uses some of the graphics library functions to deliver a simple way to construct 3d scenes. 
+  In order to understand the rendering engine architecture, lets have a grasp of what a graphics pipeline looks like.</p>
+  </li>
+  <li>
+    <p>Graphics pipeline</p>
+
+    <p>The graphics pipeline is the process of turning a 3D model into what the computer displays in the 2D screen.
+  The pipeline has the following stages.</p>
+
+    <ul>
+      <li>
+        <p>application: is executed by the software on the main processor, the CPU, initializing the window where graphics will be displayed during the following steps.</p>
+      </li>
+      <li>
+        <p>geometry: determining the position of each vertex of the geometric shapes that need to be rendered, implemented by a pogram called a vertex shader.</p>
+      </li>
+      <li>
+        <p>rasterization: estbislish the relationship between secren pixels and geometric shapes. It is responsible for the majority of the operations with polygons and their vertices</p>
+
+        <p>It can be divided in the following steps:</p>
+        <ul>
+          <li>[start] in: object coordintates</li>
+          <li>Model &amp; Camera transformations:</li>
+          <li>Lighting</li>
+          <li>Projection</li>
+          <li>Clipping</li>
+          <li>Window - view port transformation</li>
+          <li>[end] out: device (screen) coordinates</li>
+        </ul>
+      </li>
+      <li>
+        <p>pixel processing: asociates each pixel in the render image with a color, involves a program called fragment shader.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>scene tree</p>
+  </li>
+  <li>
+    <p>model matrix</p>
+  </li>
+  <li></li>
+</ul>
 
 
 
@@ -511,8 +559,7 @@
 <div class="post">
     <a href="https://waloncab.github.io/s.ln_blog/posts/rendering_engine_architecture.html">Rendering Engine Architecture</a>
     <p>2022-07-20 17:00:00 +0200</p>
-    <p>
-</p>
+    <p>graphics library vs rendering engine OpenGL is a graphics library with many functions for drawing complex geometries based on more simple geometry primitives such as points, lines and triangles. A rendering engine is a well defined framework that uses some of the graphics library functions to deliver a simple way...</p>
 </div>
             
         <br>
