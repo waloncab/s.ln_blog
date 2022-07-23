@@ -190,7 +190,15 @@
     <!-- 'contains' because need to consider paginated urls. -->
 
     
-      <a href="https://waloncab.github.io/s.ln_blog//blog/" class="active">Blog</a>
+
+      <!-- Exclusive if to consider Home page -->
+      <!-- Needs to be here to mathc the nav order -->
+
+      
+
+      <!-- ELSE show non selected -->
+
+      <a href="https://waloncab.github.io/s.ln_blog//blog/">Blog</a>
     
 
   
@@ -431,7 +439,7 @@
 
             <br>
 
-            <h1>Casteljau's Algorithm</h1>
+            <h1>Procedural Content with Splines</h1>
 
 <!-- PAGE CATEGORIES -->
 
@@ -447,107 +455,89 @@
 
 
     <button type="button" 
-            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=bezier';">
-        bezier
-    </button> 
-
-
-
-    <button type="button" 
-            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=spline';">
-        spline
+            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=procedural';">
+        procedural
     </button> 
 
 
 
 <hr>
 
-<p>Sometimes you need to define n-point curves, and generic bezier may fit your needs in those cases.
-The following lines of code represent how to design a generic bezier curve, n-grade curve.
-This algorithm uses recursion to iterate throw the entire interpolation points.</p>
+<p>There are different things that have been done with procedural content.</p>
 
-<p>Parameters:</p>
+<p>Here we are going to see some basic classifications and where the different 
+generative styles fit in. <!--more-->The few listed below are some important concepts 
+that need to be understand before jumping into any particular case.</p>
 
 <ul>
-  <li>points: the vector containing the curve modeling points.</li>
-  <li>t: the interpolation state [0 - 1]</li>
+  <li>
+    <p>Generative Art</p>
+
+    <p>Is the art that has been created using a random process. The artist uses the system to indicate 
+  how the result piece should look like. Consider a generative system as a tool someone uses to
+  define rules that tells the software how to generate some content.</p>
+  </li>
+  <li>
+    <p>Infinite Games</p>
+
+    <p>Many games or graphics projects create the world as the player walks through new areas.
+  Its a very interesting effect since a wide range of algorithms are available. 
+  A very intersted concept is the Level of Detail (LOD), since the world need to be 
+  optimezed and just render in the case of the player is using it.</p>
+  </li>
+  <li>
+    <p>Random Generation</p>
+
+    <p>Within every generative process random numbers are involved, but these are usually not enough.
+  A seed is requierd to add a more natural look to the thing we are trying to generate.
+  Perlin noise works great if used with different seeds to achive unique textures or functions
+  that can later be applied to meshes for example.</p>
+  </li>
+  <li>
+    <p>Procedural generation</p>
+
+    <p>It is about letting algorithms create content, and in some specific cases, in real-time.
+  In the case of LOD, highly optimized systems are required. We do not want to render or generate
+  any of the things the player is net able to see.</p>
+  </li>
 </ul>
 
-<p>Notice the interpolation parameter t affects the entire curve and it does not depend
-on the number of points the curve is defined.</p>
+<p>Keep reading the following blog posts for more about lines and the things you can do with them.
+Some of the use cases where the procedural generation has been useful:</p>
 
-<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">static</span> <span class="n">Vector3</span> <span class="nf">getPoint_R</span> <span class="p">(</span><span class="n">List</span><span class="p">&lt;</span><span class="n">Vector3</span><span class="p">&gt;</span> <span class="n">points</span><span class="p">,</span> <span class="kt">float</span> <span class="n">t</span><span class="p">)</span>
-<span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">points</span><span class="p">.</span><span class="n">Count</span> <span class="p">==</span> <span class="m">1</span><span class="p">)</span>  <span class="p">{</span> <span class="k">return</span> <span class="n">points</span> <span class="p">[</span><span class="m">0</span><span class="p">];</span> <span class="p">}</span>
-
-  <span class="n">List</span><span class="p">&lt;</span><span class="n">Vector3</span><span class="p">&gt;</span> <span class="n">recursive_call</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Vector3</span><span class="p">&gt;</span> <span class="p">();</span>
-
-  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="p">(</span><span class="n">points</span><span class="p">.</span><span class="n">Count</span> <span class="p">-</span> <span class="m">1</span><span class="p">);</span> <span class="n">i</span><span class="p">++)</span>
-  <span class="p">{</span>
-    <span class="n">Vector3</span> <span class="n">newPoint</span> <span class="p">=</span> <span class="p">(</span><span class="m">1</span> <span class="p">-</span> <span class="n">t</span><span class="p">)</span> <span class="p">*</span> <span class="n">points</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">+</span> <span class="n">t</span> <span class="p">*</span> <span class="n">points</span> <span class="p">[</span><span class="n">i</span> <span class="p">+</span> <span class="m">1</span><span class="p">];</span>
-
-    <span class="n">recursive_call</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">newPoint</span><span class="p">);</span>
-  <span class="p">}</span>
-
-  <span class="k">return</span> <span class="nf">getPoint_R</span> <span class="p">(</span><span class="n">recursive_call</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
-<span class="p">}</span></code></pre></figure>
+<ul>
+  <li>shapes</li>
+  <li>endless generation</li>
+  <li>motion graphics</li>
+  <li>hills</li>
+  <li>nodes</li>
+</ul>
 
 
 <!-- INCLUDE spline / procedural -->
 
 
 
+
+
   <hr>
       <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/playlist.css">
 
-<h3>Welcome to the spline-lab !</h3>
+<h3>Procedural Content Generation !</h3>
 
 <p>
-Check out the following <a href="https://youtube.com/playlist?list=PLnQ9Bb3_obbQ_ULwPaLz6DLPPUxc20fHN">playlist</a>  to see what the spline-lab is doing with lines and curves.
-Some of the listed videos contain motion graphics and animations within the lines framework.
+    Some of the procedural content you find in the <a href="https://youtube.com/playlist?list=PLnQ9Bb3_obbQ_ULwPaLz6DLPPUxc20fHN">playlist</a> target 
+    endless generation within the platforms or terrain 2.5D context.
+    Also there is a bunch demos showing simple algorithms to extend lines using random seed approach.
 </p>
 
 
 
 <ul class="images"> 
 
-    <!-- 
-
-        <li>
-            <img src="https://img.youtube.com/vi/bO-P0VUkrek/mqdefault.jpg" alt="icon" height="113" width="200">
-        </li>
-
     
 
-        <li>
-            <img src="https://img.youtube.com/vi/C86LMpCzRI4/mqdefault.jpg" alt="icon" height="113" width="200">
-        </li>
-
-    
-
-        <li>
-            <img src="https://img.youtube.com/vi/C86LMpCzRI4/mqdefault.jpg" alt="icon" height="113" width="200">
-        </li>
-
-    
-
-        <li>
-            <img src="https://img.youtube.com/vi/C86LMpCzRI4/mqdefault.jpg" alt="icon" height="113" width="200">
-        </li>
-
-    
-
-        <li>
-            <img src="https://img.youtube.com/vi/C86LMpCzRI4/mqdefault.jpg" alt="icon" height="113" width="200">
-        </li>
-
-    
-
-        <li>
-            <img src="https://img.youtube.com/vi/C86LMpCzRI4/mqdefault.jpg" alt="icon" height="113" width="200">
-        </li>
-
-     -->
+        
 
     
 
@@ -569,35 +559,7 @@ Some of the listed videos contain motion graphics and animations within the line
 
         
 
-        <li>
-            <a href="https://waloncab.github.io/s.ln_blog/demos/spline/2021/11/25/breath-animation.html">
-                <img src="https://img.youtube.com/vi/qvJVax574-4/mqdefault.jpg" alt="icon" height="113" width="200">
-            </a>
-        </li>
-
-        
-
     
-
-        
-
-        <li>
-            <a href="https://waloncab.github.io/s.ln_blog/demos/spline/2021/11/25/organic-algorithms.html">
-                <img src="https://img.youtube.com/vi/Qizighc_74Y/mqdefault.jpg" alt="icon" height="113" width="200">
-            </a>
-        </li>
-
-        
-
-    
-
-        
-
-        <li>
-            <a href="https://waloncab.github.io/s.ln_blog/demos/spline/2021/11/25/motion-graphics.html">
-                <img src="https://img.youtube.com/vi/OeRz6bf5gp8/mqdefault.jpg" alt="icon" height="113" width="200">
-            </a>
-        </li>
 
         
 
@@ -617,20 +579,74 @@ Some of the listed videos contain motion graphics and animations within the line
 
         
 
-    
+        <li>
+            <a href="https://waloncab.github.io/s.ln_blog/demos/procedural/generation/2021/10/14/procedural-terrain-2D-gen.html">
+                <img src="https://img.youtube.com/vi/pztkXGKcxo0/mqdefault.jpg" alt="icon" height="113" width="200">
+            </a>
+        </li>
 
         
 
     
+
+        
+
+        <li>
+            <a href="https://waloncab.github.io/s.ln_blog/demos/procedural/generation/2021/10/13/plain-textures-procedural-terrain.html">
+                <img src="https://img.youtube.com/vi/0mUXEIhxy_I/mqdefault.jpg" alt="icon" height="113" width="200">
+            </a>
+        </li>
+
+        
+
+    
+
+        
+
+        <li>
+            <a href="https://waloncab.github.io/s.ln_blog/demos/procedural/generation/2021/10/10/endless-procedural-generation.html">
+                <img src="https://img.youtube.com/vi/Y200qbpGYvo/mqdefault.jpg" alt="icon" height="113" width="200">
+            </a>
+        </li>
 
         
 
     
 
 </ul>
+
+<!-- 
+
+    <iframe width="213.3" height="160" 
+            src="https://www.youtube.com/embed/bO-P0VUkrek" 
+            title="Title 01" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+    </iframe>
+
+
+
+    <iframe width="213.3" height="160" 
+            src="https://www.youtube.com/embed/C86LMpCzRI4" 
+            title="Title 02" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+    </iframe>
+
+
+
+    <iframe width="213.3" height="160" 
+            src="https://www.youtube.com/embed/C86LMpCzRI4" 
+            title="Title 03" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+    </iframe>
+
+ -->
   <hr>
-
-
 
 
 
@@ -647,7 +663,7 @@ Some of the listed videos contain motion graphics and animations within the line
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/rendering_engine_architecture.html">Rendering Engine Architecture</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/rendering_engine_architecture.html">Rendering Engine Architecture</a>
     <p>2022-07-20 17:00:00 +0200</p>
     <p></p>
 </div>
@@ -659,7 +675,7 @@ Some of the listed videos contain motion graphics and animations within the line
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/pyhton/render/opengl/2022/07/20/matrix_transformations.html">Matrix Transformation for Rendering 3D objects</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/matrix_transformations.html">Matrix Transformation for Rendering 3D objects</a>
     <p>2022-07-20 17:00:00 +0200</p>
     <p>Transformations are at the core of any rendering engine. Vectors and matrices are the basic data structures that allow to desgin and create functions to transform set of points in certain geometric way. Points / Vectors / Matrices Both points and vectors are represented by a list of numbers, but...</p>
 </div>
@@ -671,7 +687,7 @@ Some of the listed videos contain motion graphics and animations within the line
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/git_automation.html">Git Commit Automation with Python</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/git_automation.html">Git Commit Automation with Python</a>
     <p>2022-07-20 17:00:00 +0200</p>
     <p>This web page is a complex piece of software. There are a few layers that composes the web, having jekyll as the backend and standard html, css, and javascript on the front-end. Since jekyll is a lightweight static web page generator, the site has to be built before uploading it...</p>
 </div>
@@ -683,7 +699,7 @@ Some of the listed videos contain motion graphics and animations within the line
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/spline/lines/interpolation/2022/07/15/spline_plot.html">Plotting Splines with Plotly and export into HTML</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/spline_plot.html">Plotting Splines with Plotly and export into HTML</a>
     <p>2022-07-15 09:56:49 +0200</p>
     <p>This spline plot has been generated using Plotly. There are many scenarios where a completly graphics engine is not necesary. Static visualization can be accomplished with simple libraries such as this one. Keep in mind what your target platforms for the plots are, and then have a look what fits...</p>
 </div>
@@ -695,9 +711,9 @@ Some of the listed videos contain motion graphics and animations within the line
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/bezier/spline/2021/11/20/Casteljau's-Algorithm.html">Casteljau's Algorithm</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/Casteljau's-Algorithm.html">Casteljau's Algorithm</a>
     <p>2021-11-20 08:56:49 +0100</p>
-    <p>Sometimes you need to define n-point curves, and generic bezier may fit your needs in those cases. The following lines of code represent how to design a generic bezier curve, n-grade curve. This algorithm uses recursion to iterate throw the entire interpolation points. Parameters: points: the vector containing the curve...</p>
+    <p>Sometimes you need to define n-point curves, and generic bezier may fit your needs in those cases. The following lines of code represent how to design a generic bezier curve, n-grade curve. This algorithm uses recursion to iterate throw the entire interpolation points. Parameters: * points: the vector containing the...</p>
 </div>
             
         <br>

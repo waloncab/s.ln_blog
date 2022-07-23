@@ -190,7 +190,15 @@
     <!-- 'contains' because need to consider paginated urls. -->
 
     
-      <a href="https://waloncab.github.io/s.ln_blog//blog/" class="active">Blog</a>
+
+      <!-- Exclusive if to consider Home page -->
+      <!-- Needs to be here to mathc the nav order -->
+
+      
+
+      <!-- ELSE show non selected -->
+
+      <a href="https://waloncab.github.io/s.ln_blog//blog/">Blog</a>
     
 
   
@@ -431,7 +439,7 @@
 
             <br>
 
-            <h1>Git Commit Automation with Python</h1>
+            <h1>Beizer Curves</h1>
 
 <!-- PAGE CATEGORIES -->
 
@@ -447,73 +455,216 @@
 
 
     <button type="button" 
-            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=jekyll';">
-        jekyll
+            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=spline';">
+        spline
     </button> 
 
 
 
     <button type="button" 
-            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=pyhton';">
-        pyhton
-    </button> 
-
-
-
-    <button type="button" 
-            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=git';">
-        git
+            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=bezier';">
+        bezier
     </button> 
 
 
 
 <hr>
 
-<p>This web page is a complex piece of software. There are a few layers that composes the web, having jekyll as the backend and standard html, css, and javascript on the front-end.
-Since jekyll is a lightweight static web page generator, the site has to be built before uploading it to any remote server. This is a very repetitive process that could be automated.
-In this blog post we are going to see a simple way to use git version control from Pyhton and upload the built web-page to github and then enable github-pages.</p>
+<p>In this post we understand how to get a point in a Bezier curve. 
+These curves are about interpolation, the most used ones are cubic beziers
+since they can be really good optimized.<!--more--> Given an interpolation parameter t, 
+the coordinates of the respective points can be calculated with a concrete formula.</p>
 
-<p>Steps:</p>
+<p>Parameters:</p>
 
 <ul>
-  <li>use [ jekyll bundle build ] to build the web page into the _site folder.</li>
-  <li>copy the _site folder to some other folder and start a git repository in there.</li>
-  <li>automate the git commit with the following lines of code.</li>
+  <li>t: the interpolation state [0 - 1]</li>
+  <li>w: weight values in the same dimensions, all x coordinate values, for example.</li>
 </ul>
 
-<p>Make sure you have previously installed the corresponding git package into your Python ( use pip install )</p>
+<p>This simple function returns the point coordinate for the interpolation value.
+However, notice the output and weights are floats, what means that we are constructing 
+the curve for each coordinate independently, {X, Y, Z}</p>
 
-<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">    pip install GitPython</code></pre></figure>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="kp">public</span> <span class="n">static</span> <span class="n">float</span> <span class="no">Bezier_3</span> <span class="p">(</span><span class="n">float</span> <span class="n">t</span><span class="p">,</span> <span class="n">float</span><span class="p">[]</span> <span class="n">w</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="no">Length</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kp">throw</span> <span class="n">new</span> <span class="no">ArgumentException</span> <span class="p">(</span><span class="s2">"List should have 4 points to be a cubic bezier"</span><span class="p">);</span>
+  <span class="p">}</span>
 
-<p>The following lines specify the basic operations that can be done with your repository. 
-Here, a random word function is being used to generate the commit identification message.</p>
+  <span class="n">float</span> <span class="n">t2</span> <span class="o">=</span> <span class="n">t</span> <span class="o">*</span> <span class="n">t</span><span class="p">;</span>
+  <span class="n">float</span> <span class="n">t3</span> <span class="o">=</span> <span class="n">t2</span> <span class="o">*</span> <span class="n">t</span><span class="p">;</span>
+  <span class="n">float</span> <span class="n">mt</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">t</span><span class="p">;</span>
+  <span class="n">float</span> <span class="n">mt2</span> <span class="o">=</span> <span class="n">mt</span> <span class="o">*</span> <span class="n">mt</span><span class="p">;</span>
+  <span class="n">float</span> <span class="n">mt3</span> <span class="o">=</span> <span class="n">mt2</span> <span class="o">*</span> <span class="n">mt</span><span class="p">;</span>
 
-<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">repo = Repo('/your_site_path')
+  <span class="k">return</span> <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mt3</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">mt2</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span> <span class="n">w</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">mt</span><span class="o">*</span><span class="n">t2</span> <span class="o">+</span> <span class="n">w</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">*</span><span class="n">t3</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
 
-# list all branches
-for branch in repo.branches:
-    print(branch)
+<p>Once the parameters are independent from the world-space, we can better optimize and 
+generate concrete bezier functions for 2D or 3D space. Have a detail look on how the 
+previous function is used to construct the curve for 3D space. Now, if the use case is 
+a simple 2D space, we can remove the correspondent weights from the {Z} coordinate.
+Notice that a reasonable computation time is saved.</p>
 
-def randomword(length):
-   letters = string.ascii_lowercase
-   return ''.join(random.choice(letters) for i in range(length))
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="kp">public</span> <span class="n">static</span> <span class="no">Vector3</span> <span class="n">getPoint</span><span class="p">(</span><span class="no">List</span><span class="o">&lt;</span><span class="no">Vector3</span><span class="o">&gt;</span> <span class="n">points</span><span class="p">,</span> <span class="n">float</span> <span class="n">t</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">points</span><span class="o">.</span><span class="no">Count</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kp">throw</span> <span class="n">new</span> <span class="no">ArgumentException</span> <span class="p">(</span><span class="s2">"List should have 4 points to be a cubic bezier"</span><span class="p">);</span>
+  <span class="p">}</span>
 
-rand_commit_m = randomword(8)
+  <span class="n">float</span><span class="p">[]</span> <span class="n">w_x</span> <span class="o">=</span> <span class="n">null</span><span class="p">;</span> <span class="n">float</span><span class="p">[]</span> <span class="n">w_y</span> <span class="o">=</span> <span class="n">null</span><span class="p">;</span> <span class="n">float</span><span class="p">[]</span> <span class="n">w_z</span> <span class="o">=</span> <span class="n">null</span><span class="p">;</span>
 
-# to checkout to a branch:
-repo.git.checkout('master')
+  <span class="n">decompose_weight</span> <span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">ref</span> <span class="n">w_x</span><span class="p">,</span> <span class="n">ref</span> <span class="n">w_y</span><span class="p">,</span> <span class="n">ref</span> <span class="n">w_z</span><span class="p">);</span>
 
-# add files
-repo.git.add(all=True)
+  <span class="n">float</span> <span class="n">x</span> <span class="o">=</span> <span class="no">Bezier_3</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">w_x</span><span class="p">);</span>
+  <span class="n">float</span> <span class="n">y</span> <span class="o">=</span> <span class="no">Bezier_3</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">w_y</span><span class="p">);</span>
+  <span class="n">float</span> <span class="n">z</span> <span class="o">=</span> <span class="no">Bezier_3</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">w_z</span><span class="p">);</span>
 
-# check differences between current files and last commit
-diff = repo.git.diff(repo.head.commit.tree)
+  <span class="k">return</span> <span class="n">new</span> <span class="no">Vector3</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
 
-# commit
-repo.index.commit(rand_commit_m)</code></pre></figure>
+<p>The decompose weights instructions just reorganizes the List<Vector3> {X;Y;Z} components into
+separated lists containing the individual space coordinate for each one.</Vector3></p>
+
 
 
 <!-- INCLUDE spline / procedural -->
+
+
+
+  <hr>
+      <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/playlist.css">
+
+<h3>Welcome to the spline-lab !</h3>
+
+<p>
+Check out the following <a href="https://youtube.com/playlist?list=PLnQ9Bb3_obbQ_ULwPaLz6DLPPUxc20fHN">playlist</a>  to see what the spline-lab is doing with lines and curves.
+Some of the listed videos contain motion graphics and animations within the lines framework.
+</p>
+
+
+
+<ul class="images"> 
+
+    <!-- 
+
+        <li>
+            <img src="https://img.youtube.com/vi/bO-P0VUkrek/mqdefault.jpg" alt="icon" height="113" width="200">
+        </li>
+
+    
+
+        <li>
+            <img src="https://img.youtube.com/vi/C86LMpCzRI4/mqdefault.jpg" alt="icon" height="113" width="200">
+        </li>
+
+    
+
+        <li>
+            <img src="https://img.youtube.com/vi/C86LMpCzRI4/mqdefault.jpg" alt="icon" height="113" width="200">
+        </li>
+
+    
+
+        <li>
+            <img src="https://img.youtube.com/vi/C86LMpCzRI4/mqdefault.jpg" alt="icon" height="113" width="200">
+        </li>
+
+    
+
+        <li>
+            <img src="https://img.youtube.com/vi/C86LMpCzRI4/mqdefault.jpg" alt="icon" height="113" width="200">
+        </li>
+
+    
+
+        <li>
+            <img src="https://img.youtube.com/vi/C86LMpCzRI4/mqdefault.jpg" alt="icon" height="113" width="200">
+        </li>
+
+     -->
+
+    
+
+        
+
+    
+
+        
+
+    
+
+        
+
+    
+
+        
+
+    
+
+        
+
+        <li>
+            <a href="https://waloncab.github.io/s.ln_blog/demos/spline/2021/11/25/breath-animation.html">
+                <img src="https://img.youtube.com/vi/qvJVax574-4/mqdefault.jpg" alt="icon" height="113" width="200">
+            </a>
+        </li>
+
+        
+
+    
+
+        
+
+        <li>
+            <a href="https://waloncab.github.io/s.ln_blog/demos/spline/2021/11/25/organic-algorithms.html">
+                <img src="https://img.youtube.com/vi/Qizighc_74Y/mqdefault.jpg" alt="icon" height="113" width="200">
+            </a>
+        </li>
+
+        
+
+    
+
+        
+
+        <li>
+            <a href="https://waloncab.github.io/s.ln_blog/demos/spline/2021/11/25/motion-graphics.html">
+                <img src="https://img.youtube.com/vi/OeRz6bf5gp8/mqdefault.jpg" alt="icon" height="113" width="200">
+            </a>
+        </li>
+
+        
+
+    
+
+        
+
+        <li>
+            <a href="https://waloncab.github.io/s.ln_blog/demos/spline/procedural/2021/11/25/demo_reel-AAA.html">
+                <img src="https://img.youtube.com/vi/ggb8ZFBzjCs/mqdefault.jpg" alt="icon" height="113" width="200">
+            </a>
+        </li>
+
+        
+
+    
+
+        
+
+    
+
+        
+
+    
+
+        
+
+    
+
+</ul>
+  <hr>
 
 
 
@@ -532,7 +683,7 @@ repo.index.commit(rand_commit_m)</code></pre></figure>
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/rendering_engine_architecture.html">Rendering Engine Architecture</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/rendering_engine_architecture.html">Rendering Engine Architecture</a>
     <p>2022-07-20 17:00:00 +0200</p>
     <p></p>
 </div>
@@ -544,7 +695,7 @@ repo.index.commit(rand_commit_m)</code></pre></figure>
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/pyhton/render/opengl/2022/07/20/matrix_transformations.html">Matrix Transformation for Rendering 3D objects</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/matrix_transformations.html">Matrix Transformation for Rendering 3D objects</a>
     <p>2022-07-20 17:00:00 +0200</p>
     <p>Transformations are at the core of any rendering engine. Vectors and matrices are the basic data structures that allow to desgin and create functions to transform set of points in certain geometric way. Points / Vectors / Matrices Both points and vectors are represented by a list of numbers, but...</p>
 </div>
@@ -556,7 +707,7 @@ repo.index.commit(rand_commit_m)</code></pre></figure>
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/git_automation.html">Git Commit Automation with Python</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/git_automation.html">Git Commit Automation with Python</a>
     <p>2022-07-20 17:00:00 +0200</p>
     <p>This web page is a complex piece of software. There are a few layers that composes the web, having jekyll as the backend and standard html, css, and javascript on the front-end. Since jekyll is a lightweight static web page generator, the site has to be built before uploading it...</p>
 </div>
@@ -568,7 +719,7 @@ repo.index.commit(rand_commit_m)</code></pre></figure>
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/spline/lines/interpolation/2022/07/15/spline_plot.html">Plotting Splines with Plotly and export into HTML</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/spline_plot.html">Plotting Splines with Plotly and export into HTML</a>
     <p>2022-07-15 09:56:49 +0200</p>
     <p>This spline plot has been generated using Plotly. There are many scenarios where a completly graphics engine is not necesary. Static visualization can be accomplished with simple libraries such as this one. Keep in mind what your target platforms for the plots are, and then have a look what fits...</p>
 </div>
@@ -580,9 +731,9 @@ repo.index.commit(rand_commit_m)</code></pre></figure>
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/bezier/spline/2021/11/20/Casteljau's-Algorithm.html">Casteljau's Algorithm</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/Casteljau's-Algorithm.html">Casteljau's Algorithm</a>
     <p>2021-11-20 08:56:49 +0100</p>
-    <p>Sometimes you need to define n-point curves, and generic bezier may fit your needs in those cases. The following lines of code represent how to design a generic bezier curve, n-grade curve. This algorithm uses recursion to iterate throw the entire interpolation points. Parameters: points: the vector containing the curve...</p>
+    <p>Sometimes you need to define n-point curves, and generic bezier may fit your needs in those cases. The following lines of code represent how to design a generic bezier curve, n-grade curve. This algorithm uses recursion to iterate throw the entire interpolation points. Parameters: * points: the vector containing the...</p>
 </div>
             
         <br>

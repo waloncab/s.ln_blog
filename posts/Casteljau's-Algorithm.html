@@ -190,7 +190,15 @@
     <!-- 'contains' because need to consider paginated urls. -->
 
     
-      <a href="https://waloncab.github.io/s.ln_blog//blog/" class="active">Blog</a>
+
+      <!-- Exclusive if to consider Home page -->
+      <!-- Needs to be here to mathc the nav order -->
+
+      
+
+      <!-- ELSE show non selected -->
+
+      <a href="https://waloncab.github.io/s.ln_blog//blog/">Blog</a>
     
 
   
@@ -431,7 +439,7 @@
 
             <br>
 
-            <h1>DSL Fluent</h1>
+            <h1>Casteljau's Algorithm</h1>
 
 <!-- PAGE CATEGORIES -->
 
@@ -447,94 +455,188 @@
 
 
     <button type="button" 
-            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=software';">
-        software
+            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=bezier';">
+        bezier
+    </button> 
+
+
+
+    <button type="button" 
+            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=spline';">
+        spline
     </button> 
 
 
 
 <hr>
 
-<p>We can define a domain-specific language (DSL) as a programming language specialized to a particular application domain.
-In this blog post we understand some key concepts and use cases inside the lines framework.</p>
+<p>Sometimes you need to define n-point curves, and generic bezier may fit your needs in those cases.
+The following lines of code represent how to design a generic bezier curve, n-grade curve.
+This algorithm uses recursion to iterate throw the entire interpolation points.</p>
 
-<p>An interface was needed for programable movement along lines. In this specific case a custom DSL
-allows to program simple instructions without understanding any of the inner working of the framework.</p>
-
-<p>There is a sharp definition between the general purpose language that host the framework and the
-domain specific language stored in scripts that can later be process. Encapsulating instructions in scripts 
-make this kind of code highly reusable along different components.</p>
-
-<p>We are using an expression builder to construct the graph that represents a movement state machine.
-In this case we are not working with simple value assignments or defined instructions. 
-The DSL represents a complex data structure, expression builders need to be defined 
-for each new sentence.</p>
-
-<p>Lets analyze a fluent API and the elements we are using here.</p>
-
-<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="n">ExpressionBuilder</span> <span class="n">builder</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">();</span>
-
-<span class="n">builder</span><span class="p">.</span><span class="nf">loop</span><span class="p">()</span>
-            <span class="p">.</span><span class="nf">times</span><span class="p">(</span><span class="m">5</span><span class="p">)</span>
-            <span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">()</span>
-                <span class="p">.</span><span class="nf">sequence</span><span class="p">()</span>
-                    <span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">().</span><span class="n">terminal</span><span class="p">&lt;</span><span class="n">MoveBuilder</span><span class="p">&gt;()</span>
-                            <span class="p">.</span><span class="nf">distance</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
-                        <span class="p">.</span><span class="nf">move_end</span><span class="p">()</span>
-                    <span class="p">)</span>
-                    <span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">().</span><span class="n">terminal</span><span class="p">&lt;</span><span class="n">MoveBuilder</span><span class="p">&gt;()</span>
-                            <span class="p">.</span><span class="nf">min</span><span class="p">(-</span><span class="m">5</span><span class="p">)</span>
-                            <span class="p">.</span><span class="nf">max</span><span class="p">(</span><span class="m">5</span><span class="p">)</span>
-                        <span class="p">.</span><span class="nf">move_end</span><span class="p">()</span>
-                    <span class="p">)</span>
-                    <span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">()</span>
-                        <span class="p">.</span><span class="nf">decide</span><span class="p">()</span>
-                            <span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="m">0.3f</span><span class="p">,</span> <span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">().</span><span class="n">terminal</span><span class="p">&lt;</span><span class="n">MoveBuilder</span><span class="p">&gt;()</span>
-                                    <span class="p">.</span><span class="nf">min</span><span class="p">(-</span><span class="m">8</span><span class="p">)</span>
-                                    <span class="p">.</span><span class="nf">max</span><span class="p">(</span><span class="m">8</span><span class="p">)</span>
-                                <span class="p">.</span><span class="nf">move_end</span><span class="p">()</span>
-                            <span class="p">)</span>
-                            <span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="m">0.7f</span><span class="p">,</span> <span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">().</span><span class="n">terminal</span><span class="p">&lt;</span><span class="n">MoveBuilder</span><span class="p">&gt;()</span>
-                                    <span class="p">.</span><span class="nf">distance</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>
-                                <span class="p">.</span><span class="nf">move_end</span><span class="p">()</span>
-                            <span class="p">)</span>
-                        <span class="p">.</span><span class="nf">decide_end</span><span class="p">()</span>
-                    <span class="p">)</span>
-                <span class="p">.</span><span class="nf">sequence_end</span><span class="p">()</span>
-            <span class="p">)</span>
-        <span class="p">.</span><span class="nf">loop_end</span><span class="p">()</span>
-    <span class="p">.</span><span class="nf">end</span><span class="p">();</span>
-
-<span class="k">return</span> <span class="n">builder</span><span class="p">.</span><span class="nf">Generate</span><span class="p">();</span></code></pre></figure>
-
-<p>This expression tree builds a complex graph State-Machine.
-The fluent interface allows to link instructions in a natural expressive way.
-Notice the difference between the terminal and non-terminal expressions.</p>
+<p>Parameters:</p>
 
 <ul>
-  <li>
-    <p>Terminal:
-  Represent the behavior we want to add to the graph.</p>
-  </li>
-  <li>
-    <p>Non-Terminal:
-  Integrate flow control with elements such as loop, sequences and decisions.</p>
-  </li>
+  <li>points: the vector containing the curve modeling points.</li>
+  <li>t: the interpolation state [0 - 1]</li>
 </ul>
 
-<p>Fluent APIs are popular among DSL, according to Wikipedia a fluent API is a way of implementing 
-object oriented code with a more natural and human readable interface. 
-Method chaining is used to relay the instruction context of a subsequent expression.
-But there are more elements to consider in those concrete languages.</p>
+<p>Notice the interpolation parameter t affects the entire curve and it does not depend
+on the number of points the curve is defined.</p>
 
-<ul>
-  <li>Method Chaining</li>
-  <li>Method Cascading</li>
-  <li>Progressive Interfaces</li>
-</ul>
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">static</span> <span class="n">Vector3</span> <span class="nf">getPoint_R</span> <span class="p">(</span><span class="n">List</span><span class="p">&lt;</span><span class="n">Vector3</span><span class="p">&gt;</span> <span class="n">points</span><span class="p">,</span> <span class="kt">float</span> <span class="n">t</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">points</span><span class="p">.</span><span class="n">Count</span> <span class="p">==</span> <span class="m">1</span><span class="p">)</span>  <span class="p">{</span> <span class="k">return</span> <span class="n">points</span> <span class="p">[</span><span class="m">0</span><span class="p">];</span> <span class="p">}</span>
+
+  <span class="n">List</span><span class="p">&lt;</span><span class="n">Vector3</span><span class="p">&gt;</span> <span class="n">recursive_call</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Vector3</span><span class="p">&gt;</span> <span class="p">();</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="p">(</span><span class="n">points</span><span class="p">.</span><span class="n">Count</span> <span class="p">-</span> <span class="m">1</span><span class="p">);</span> <span class="n">i</span><span class="p">++)</span>
+  <span class="p">{</span>
+    <span class="n">Vector3</span> <span class="n">newPoint</span> <span class="p">=</span> <span class="p">(</span><span class="m">1</span> <span class="p">-</span> <span class="n">t</span><span class="p">)</span> <span class="p">*</span> <span class="n">points</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">+</span> <span class="n">t</span> <span class="p">*</span> <span class="n">points</span> <span class="p">[</span><span class="n">i</span> <span class="p">+</span> <span class="m">1</span><span class="p">];</span>
+
+    <span class="n">recursive_call</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">newPoint</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nf">getPoint_R</span> <span class="p">(</span><span class="n">recursive_call</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
 
 
 <!-- INCLUDE spline / procedural -->
+
+
+
+  <hr>
+      <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/playlist.css">
+
+<h3>Welcome to the spline-lab !</h3>
+
+<p>
+Check out the following <a href="https://youtube.com/playlist?list=PLnQ9Bb3_obbQ_ULwPaLz6DLPPUxc20fHN">playlist</a>  to see what the spline-lab is doing with lines and curves.
+Some of the listed videos contain motion graphics and animations within the lines framework.
+</p>
+
+
+
+<ul class="images"> 
+
+    <!-- 
+
+        <li>
+            <img src="https://img.youtube.com/vi/bO-P0VUkrek/mqdefault.jpg" alt="icon" height="113" width="200">
+        </li>
+
+    
+
+        <li>
+            <img src="https://img.youtube.com/vi/C86LMpCzRI4/mqdefault.jpg" alt="icon" height="113" width="200">
+        </li>
+
+    
+
+        <li>
+            <img src="https://img.youtube.com/vi/C86LMpCzRI4/mqdefault.jpg" alt="icon" height="113" width="200">
+        </li>
+
+    
+
+        <li>
+            <img src="https://img.youtube.com/vi/C86LMpCzRI4/mqdefault.jpg" alt="icon" height="113" width="200">
+        </li>
+
+    
+
+        <li>
+            <img src="https://img.youtube.com/vi/C86LMpCzRI4/mqdefault.jpg" alt="icon" height="113" width="200">
+        </li>
+
+    
+
+        <li>
+            <img src="https://img.youtube.com/vi/C86LMpCzRI4/mqdefault.jpg" alt="icon" height="113" width="200">
+        </li>
+
+     -->
+
+    
+
+        
+
+    
+
+        
+
+    
+
+        
+
+    
+
+        
+
+    
+
+        
+
+        <li>
+            <a href="https://waloncab.github.io/s.ln_blog/demos/spline/2021/11/25/breath-animation.html">
+                <img src="https://img.youtube.com/vi/qvJVax574-4/mqdefault.jpg" alt="icon" height="113" width="200">
+            </a>
+        </li>
+
+        
+
+    
+
+        
+
+        <li>
+            <a href="https://waloncab.github.io/s.ln_blog/demos/spline/2021/11/25/organic-algorithms.html">
+                <img src="https://img.youtube.com/vi/Qizighc_74Y/mqdefault.jpg" alt="icon" height="113" width="200">
+            </a>
+        </li>
+
+        
+
+    
+
+        
+
+        <li>
+            <a href="https://waloncab.github.io/s.ln_blog/demos/spline/2021/11/25/motion-graphics.html">
+                <img src="https://img.youtube.com/vi/OeRz6bf5gp8/mqdefault.jpg" alt="icon" height="113" width="200">
+            </a>
+        </li>
+
+        
+
+    
+
+        
+
+        <li>
+            <a href="https://waloncab.github.io/s.ln_blog/demos/spline/procedural/2021/11/25/demo_reel-AAA.html">
+                <img src="https://img.youtube.com/vi/ggb8ZFBzjCs/mqdefault.jpg" alt="icon" height="113" width="200">
+            </a>
+        </li>
+
+        
+
+    
+
+        
+
+    
+
+        
+
+    
+
+        
+
+    
+
+</ul>
+  <hr>
 
 
 
@@ -553,7 +655,7 @@ But there are more elements to consider in those concrete languages.</p>
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/rendering_engine_architecture.html">Rendering Engine Architecture</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/rendering_engine_architecture.html">Rendering Engine Architecture</a>
     <p>2022-07-20 17:00:00 +0200</p>
     <p></p>
 </div>
@@ -565,7 +667,7 @@ But there are more elements to consider in those concrete languages.</p>
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/pyhton/render/opengl/2022/07/20/matrix_transformations.html">Matrix Transformation for Rendering 3D objects</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/matrix_transformations.html">Matrix Transformation for Rendering 3D objects</a>
     <p>2022-07-20 17:00:00 +0200</p>
     <p>Transformations are at the core of any rendering engine. Vectors and matrices are the basic data structures that allow to desgin and create functions to transform set of points in certain geometric way. Points / Vectors / Matrices Both points and vectors are represented by a list of numbers, but...</p>
 </div>
@@ -577,7 +679,7 @@ But there are more elements to consider in those concrete languages.</p>
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/git_automation.html">Git Commit Automation with Python</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/git_automation.html">Git Commit Automation with Python</a>
     <p>2022-07-20 17:00:00 +0200</p>
     <p>This web page is a complex piece of software. There are a few layers that composes the web, having jekyll as the backend and standard html, css, and javascript on the front-end. Since jekyll is a lightweight static web page generator, the site has to be built before uploading it...</p>
 </div>
@@ -589,7 +691,7 @@ But there are more elements to consider in those concrete languages.</p>
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/spline/lines/interpolation/2022/07/15/spline_plot.html">Plotting Splines with Plotly and export into HTML</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/spline_plot.html">Plotting Splines with Plotly and export into HTML</a>
     <p>2022-07-15 09:56:49 +0200</p>
     <p>This spline plot has been generated using Plotly. There are many scenarios where a completly graphics engine is not necesary. Static visualization can be accomplished with simple libraries such as this one. Keep in mind what your target platforms for the plots are, and then have a look what fits...</p>
 </div>
@@ -601,9 +703,9 @@ But there are more elements to consider in those concrete languages.</p>
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/bezier/spline/2021/11/20/Casteljau's-Algorithm.html">Casteljau's Algorithm</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/Casteljau's-Algorithm.html">Casteljau's Algorithm</a>
     <p>2021-11-20 08:56:49 +0100</p>
-    <p>Sometimes you need to define n-point curves, and generic bezier may fit your needs in those cases. The following lines of code represent how to design a generic bezier curve, n-grade curve. This algorithm uses recursion to iterate throw the entire interpolation points. Parameters: * points: the vector containing the...</p>
+    <p>Sometimes you need to define n-point curves, and generic bezier may fit your needs in those cases. The following lines of code represent how to design a generic bezier curve, n-grade curve. This algorithm uses recursion to iterate throw the entire interpolation points. Parameters: points: the vector containing the curve...</p>
 </div>
             
         <br>

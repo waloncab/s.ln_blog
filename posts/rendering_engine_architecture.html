@@ -190,7 +190,15 @@
     <!-- 'contains' because need to consider paginated urls. -->
 
     
-      <a href="https://waloncab.github.io/s.ln_blog//blog/" class="active">Blog</a>
+
+      <!-- Exclusive if to consider Home page -->
+      <!-- Needs to be here to mathc the nav order -->
+
+      
+
+      <!-- ELSE show non selected -->
+
+      <a href="https://waloncab.github.io/s.ln_blog//blog/">Blog</a>
     
 
   
@@ -431,7 +439,7 @@
 
             <br>
 
-            <h1>Matrix Transformation for Rendering 3D objects</h1>
+            <h1>Rendering Engine Architecture</h1>
 
 <!-- PAGE CATEGORIES -->
 
@@ -447,6 +455,13 @@
 
 
     <button type="button" 
+            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=jekyll';">
+        jekyll
+    </button> 
+
+
+
+    <button type="button" 
             onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=pyhton';">
         pyhton
     </button> 
@@ -454,203 +469,16 @@
 
 
     <button type="button" 
-            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=render';">
-        render
-    </button> 
-
-
-
-    <button type="button" 
-            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=openGL';">
-        openGL
+            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=git';">
+        git
     </button> 
 
 
 
 <hr>
 
-<!-- <h3> Matrix Transformations & Rendering 3D</h3> -->
 
-<p>
-    Transformations are at the core of any rendering engine. 
-    Vectors and matrices are the basic data structures that allow to
-    desgin and create functions to transform set of points in certain geometric way.
-</p>
 
-<h3> Points / Vectors / Matrices</h3>
-<p>
-    Both points and vectors are represented by a list of numbers, but they have different geometric interpretations.
-    Points are simple a defined position in a space but vectors represent a direction within that space.
-    Matrices are the best mathematical construct to apply transformations to the points and vectors, GPUs are highly optimized
-    to compute matrix multiplications in parallel.
-</p>
-
-<h3> What kind of operations are needed in the 3D space ? </h3>
-
-<p>Well, in any rendering engine, we require the following:</p>
-
-<ul>
-    <li>translation</li>
-    <li>rotation</li>
-    <li>scale</li>
-</ul>
-
-<p> Keep reding the text and imagine that transformations are applied from the origin of the coordinate system (global coordinates), 
-    we'll consider local transformations later  </p>
-
-<h3>4x4 Matrix in a 3D Space</h3>
-
-<p> <a href="https://en.wikipedia.org/wiki/Homogeneous_coordinates">homogeneuos coordinates</a> are a system of coordinates used in projective geometry.
-    They have the advantage that the coordinates of points, including points at infinity, can be represented using finite coordinates.
-    Since translation is not a linear transformation we need to embed 3x3 matrices in a 4x4 matrices, <a href="https://en.wikipedia.org/wiki/Translation_(geometry)">find out why</a>
-</p>
-
-<h3> Basic Transformation Matrices</h3>
-
-<p>
-For any given object we need to translate, rotate, and scale. Each one of this scene objects need to store transformation data in a 4x4 matrix. 
-The matrix multiplication allow to easily modify the transformation data the object stores.
-The following blocks of code create the most basic matrices in numpy arrays.
-</p>
-
-<h3>Model Matrix</h3>
-
-    <p>
-    A matrix is used to store the transformation of any object, but what about the points / vertices of that object in the case that 
-    it renders some kind of mesh ?
-    </p>
-
-    <p>Storing the transformation in the model matrix allows : </p>
-
-    <ul>
-        <li>chain transformations by multiplying the model matrix of the object, the result matrix will store the acumulated transformatins.</li>
-        <li>render a complex mesh without having to store the vertices of the mesh inside the object.</li>
-    </ul>
-
-<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">def init_Identity():
-
-    return np.array( [
-        [1, 0, 0, 0],
-        [0, 1, 0, 0],
-        [0 ,0, 1, 0],
-        [0, 0, 0, 1]
-    ]).astype(float)</code></pre></figure>
-
-<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">def init_Translation(x,y,z):
-
-    return np.array( [
-        [1, 0, 0, x],
-        [0, 1, 0, y],
-        [0 ,0, 1, z],
-        [0, 0, 0, 1]
-    ]).astype(float)</code></pre></figure>
-
-<p>
-    The followings lines of code represent the rotation matrices for the x,y,z axes.
-    Rotation happens around an axis, and the rotation matrix does not move the axis.
-    Rotation can be produced arond any vector, but we are considering just the rotation around the 
-    basis vectors (axis) since other roations can be derived later from the world matrix.
-</p>
-
-<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">def init_RotationX(angle):
-
-    c = cos(angle)
-    s = sin(angle)
-
-    return np.array( [
-        [1, 0,  0, 0],
-        [0, c, -s, 0],
-        [0 ,s,  c, 0],
-        [0, 0,  0, 1]
-    ]).astype(float)
-
-def init_RotationY(angle):
-
-    c = cos(angle)
-    s = sin(angle)
-
-    return np.array( [
-        [ c, 0, s, 0],
-        [ 0, 1, 0, 0],
-        [-s ,0, c, 0],
-        [ 0, 0, 0, 1]
-    ]).astype(float)
-
-def init_RotationZ(angle):
-
-    c = cos(angle)
-    s = sin(angle)
-
-    return np.array( [
-        [c, -s, 0, 0],
-        [s, c, 0, 0],
-        [0 ,0, 1, 0],
-        [0, 0, 0, 1]
-    ]).astype(float)</code></pre></figure>
-
-<p>
-    This scale matrix only accepts one parameter scaling the object uniformly along the x,y, axes.
-</p>
-
-<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">def init_Scale(s):
-
-    return np.array( [
-        [s, 0, 0, 0],
-        [0, s, 0, 0],
-        [0 ,0, s, 0],
-        [0, 0, 0, 1]
-    ]).astype(float)</code></pre></figure>
-
-<h3> Local vs Global Coordinates </h3>
-
-<p>
-    When we multiply any of the previous matrices by some point we are transforming that point in a global coordinate system (Origin(0,0,0)). 
-    For example, when multiplying a point by the translation matrix the point moves along the basis x,y,z axis.
-    Local transformations requiere to define an internal local coordinate system. Origin, orientation, and scale of the
-    local coordinate axes are chosen for conviniece, but usually the center of the object is selected to transform locally.
-</p>
-
-<h3> How to use matrix multiplication to perform transformations in Local Coordinate Systems </h3>
-
-    <p>
-        Let's keep it simple, in order to perform any global transformation we chain matrix multiplications on the left side of expression.
-        To achive local transformations just multiply on the right side of the expression. 
-        Keep in mind that matrix multiplication is not commutative: A*B != B*A 
-    </p>
-
-    <ul>
-        <li>Global Transformation: T3 * T2 * T1 * M(model_matrix)</li>
-        <li>Local Transformation: M(model_matrix) * T1 * T2 * T3</li>
-    </ul>
-
-<p>
-    Perspective matrix for rendering the scene.
-</p>
-
-<ul>
-    <li>Frustum: truncated pyramid that defines the visible region.</li>
-    <li>Parameters</li>
-    <ul>
-        <li>near / far distance: </li>
-        <li>angle of view: the angle between fron and bottom frustom planes.</li>
-        <li>aspect ratio: width / height of the rendered image.</li>
-    </ul>
-    
-<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">def init_Perspective(angleOfView=60, aspectRatio=1, near=0.1, far=1000):
-
-    #convert to radians
-    a = angleOfView *pi/180
-    d = 1.0 / tan(a/2)
-    r = aspectRatio
-    b = (far + near) / (near - far)
-    c =  2 * far * near / (near - far)
-
-    return np.array( [
-        [d/r, 0, 0, 0],
-        [0, d, 0, 0],
-        [0 ,0, b, c],
-        [0, 0, -1, 0]
-    ]).astype(float)</code></pre></figure>
 
 <!-- INCLUDE spline / procedural -->
 
@@ -671,9 +499,10 @@ def init_RotationZ(angle):
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/rendering_engine_architecture.html">Rendering Engine Architecture</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/rendering_engine_architecture.html">Rendering Engine Architecture</a>
     <p>2022-07-20 17:00:00 +0200</p>
-    <p></p>
+    <p>
+</p>
 </div>
             
         <br>
@@ -683,7 +512,7 @@ def init_RotationZ(angle):
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/pyhton/render/opengl/2022/07/20/matrix_transformations.html">Matrix Transformation for Rendering 3D objects</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/matrix_transformations.html">Matrix Transformation for Rendering 3D objects</a>
     <p>2022-07-20 17:00:00 +0200</p>
     <p>Transformations are at the core of any rendering engine. Vectors and matrices are the basic data structures that allow to desgin and create functions to transform set of points in certain geometric way. Points / Vectors / Matrices Both points and vectors are represented by a list of numbers, but...</p>
 </div>
@@ -695,7 +524,7 @@ def init_RotationZ(angle):
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/git_automation.html">Git Commit Automation with Python</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/git_automation.html">Git Commit Automation with Python</a>
     <p>2022-07-20 17:00:00 +0200</p>
     <p>This web page is a complex piece of software. There are a few layers that composes the web, having jekyll as the backend and standard html, css, and javascript on the front-end. Since jekyll is a lightweight static web page generator, the site has to be built before uploading it...</p>
 </div>
@@ -707,7 +536,7 @@ def init_RotationZ(angle):
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/spline/lines/interpolation/2022/07/15/spline_plot.html">Plotting Splines with Plotly and export into HTML</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/spline_plot.html">Plotting Splines with Plotly and export into HTML</a>
     <p>2022-07-15 09:56:49 +0200</p>
     <p>This spline plot has been generated using Plotly. There are many scenarios where a completly graphics engine is not necesary. Static visualization can be accomplished with simple libraries such as this one. Keep in mind what your target platforms for the plots are, and then have a look what fits...</p>
 </div>
@@ -719,7 +548,7 @@ def init_RotationZ(angle):
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/bezier/spline/2021/11/20/Casteljau's-Algorithm.html">Casteljau's Algorithm</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/Casteljau's-Algorithm.html">Casteljau's Algorithm</a>
     <p>2021-11-20 08:56:49 +0100</p>
     <p>Sometimes you need to define n-point curves, and generic bezier may fit your needs in those cases. The following lines of code represent how to design a generic bezier curve, n-grade curve. This algorithm uses recursion to iterate throw the entire interpolation points. Parameters: points: the vector containing the curve...</p>
 </div>

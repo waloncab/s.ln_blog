@@ -431,7 +431,7 @@
 
             <br>
 
-            <h1>Interpoaltion in Graphics</h1>
+            <h1>S-Lines Welcome</h1>
 
 <!-- PAGE CATEGORIES -->
 
@@ -453,69 +453,37 @@
 
 
 
-    <button type="button" 
-            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=lines';">
-        lines
-    </button> 
-
-
-
-    <button type="button" 
-            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=interpolation';">
-        interpolation
-    </button> 
-
-
-
 <hr>
 
-<p>What traversing splines looks like?</p>
+<p>Welcome to the Blog!</p>
 
-<p>Interpolation in one of the core features of graphics development, you have it almost in every small tool that the game engine contains.
-Within the spline framework a linear interpolation is used to traverse shapes. 
-Lets see some of the most relevant types of interpolation:</p>
+<p>S-Lines Engine is about lines, all types of lines, Bezier curves, splines, polylines, etc.
+Create paths, follow those paths, make procedural animations or control the iteration state 
+with a few keys.<!--more--></p>
 
-<ul>
-  <li>linear interpolation</li>
-  <li>polynomial interpolation</li>
-  <li>spline interpolation</li>
-  <li>Hermite interpolation</li>
-</ul>
+<p>This blog is going to cover different material related to demo projects
+as well as how to understand key concepts related to graphics and visualization.
+We will cover how algorithms can be used to create art within a graphics engine
+without choosing any specific one, by relying on abstractions.</p>
 
-<p>Do not mistake the fact that within a spline a linear interpolation is used to go from the start to the end of the curve.
-In fact we use this linear approach for any iterable line / curve. A spline interpolation could be used to move an object along
-a spline.</p>
+<p>This post is just an explanation of what you can see in the YouTube channel.
+Most of the videos include lines in one form or another.</p>
 
-<p>Linear interpolation is the basic tool used in many cases. It interpolates at a constant pace from point a to point b.</p>
-
-<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="kt">double</span> <span class="nf">interpolate_linear</span> <span class="p">(</span><span class="kt">double</span> <span class="n">y1</span><span class="p">,</span> <span class="kt">double</span> <span class="n">y2</span><span class="p">,</span> <span class="kt">double</span> <span class="n">mu</span><span class="p">)</span>
-<span class="p">{</span>
-   <span class="k">return</span><span class="p">(</span><span class="n">y1</span><span class="p">*(</span><span class="m">1</span><span class="p">-</span><span class="n">mu</span><span class="p">)+</span><span class="n">y2</span><span class="p">*</span><span class="n">mu</span><span class="p">);</span>
-<span class="p">}</span></code></pre></figure>
-
-<p>Cubic interpolation is widely used when the movement needs some smooth look (polynomial interpolation).</p>
-
-<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="kt">double</span> <span class="nf">interpolate_cubic</span><span class="p">(</span><span class="kt">double</span> <span class="n">y0</span><span class="p">,</span> <span class="kt">double</span> <span class="n">y1</span><span class="p">,</span> <span class="kt">double</span> <span class="n">y2</span><span class="p">,</span> <span class="kt">double</span> <span class="n">y3</span><span class="p">,</span> <span class="kt">double</span> <span class="n">mu</span><span class="p">)</span>
-<span class="p">{</span>
-   <span class="kt">double</span> <span class="n">a0</span><span class="p">,</span><span class="n">a1</span><span class="p">,</span><span class="n">a2</span><span class="p">,</span><span class="n">a3</span><span class="p">,</span><span class="n">mu2</span><span class="p">;</span>
-
-   <span class="n">mu2</span> <span class="p">=</span> <span class="n">mu</span><span class="p">*</span><span class="n">mu</span><span class="p">;</span>
-
-   <span class="n">a0</span> <span class="p">=</span> <span class="n">y3</span> <span class="p">-</span> <span class="n">y2</span> <span class="p">-</span> <span class="n">y0</span> <span class="p">+</span> <span class="n">y1</span><span class="p">;</span>
-   <span class="n">a1</span> <span class="p">=</span> <span class="n">y0</span> <span class="p">-</span> <span class="n">y1</span> <span class="p">-</span> <span class="n">a0</span><span class="p">;</span>
-   <span class="n">a2</span> <span class="p">=</span> <span class="n">y2</span> <span class="p">-</span> <span class="n">y0</span><span class="p">;</span>
-   <span class="n">a3</span> <span class="p">=</span> <span class="n">y1</span><span class="p">;</span>
-
-   <span class="k">return</span><span class="p">(</span><span class="n">a0</span><span class="p">*</span><span class="n">mu</span><span class="p">*</span><span class="n">mu2</span><span class="p">+</span><span class="n">a1</span><span class="p">*</span><span class="n">mu2</span><span class="p">+</span><span class="n">a2</span><span class="p">*</span><span class="n">mu</span><span class="p">+</span><span class="n">a3</span><span class="p">);</span>
-<span class="p">}</span></code></pre></figure>
-
-<p>What other scenarios is interpolation used?</p>
+<p>The demos that have been made include some of the listed topics.
+Many of them, mix different concepts and use a wide range of algorithms to 
+achieve its purpose.</p>
 
 <ul>
-  <li>For any animation whether 2d or 3d, interpolation is used inside the skeleton model.</li>
-  <li>Inside camera movement interpolation allows smooth follow behavior.</li>
-  <li>Dynamic movement NPC’s constantly use interpolation to adapt the chasing movement.</li>
+  <li>Path Follow</li>
+  <li>Shapes Design</li>
+  <li>3d modeling</li>
+  <li>procedural content</li>
+  <li>pattern recognition</li>
+  <li>animations</li>
+  <li>motion graphics</li>
 </ul>
+
+<p>Keep reading the following blog posts for more about lines and the things you can do with them.</p>
 
 
 <!-- INCLUDE spline / procedural -->
@@ -672,7 +640,7 @@ Some of the listed videos contain motion graphics and animations within the line
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/rendering_engine_architecture.html">Rendering Engine Architecture</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/rendering_engine_architecture.html">Rendering Engine Architecture</a>
     <p>2022-07-20 17:00:00 +0200</p>
     <p></p>
 </div>
@@ -684,7 +652,7 @@ Some of the listed videos contain motion graphics and animations within the line
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/pyhton/render/opengl/2022/07/20/matrix_transformations.html">Matrix Transformation for Rendering 3D objects</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/matrix_transformations.html">Matrix Transformation for Rendering 3D objects</a>
     <p>2022-07-20 17:00:00 +0200</p>
     <p>Transformations are at the core of any rendering engine. Vectors and matrices are the basic data structures that allow to desgin and create functions to transform set of points in certain geometric way. Points / Vectors / Matrices Both points and vectors are represented by a list of numbers, but...</p>
 </div>
@@ -696,7 +664,7 @@ Some of the listed videos contain motion graphics and animations within the line
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/git_automation.html">Git Commit Automation with Python</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/git_automation.html">Git Commit Automation with Python</a>
     <p>2022-07-20 17:00:00 +0200</p>
     <p>This web page is a complex piece of software. There are a few layers that composes the web, having jekyll as the backend and standard html, css, and javascript on the front-end. Since jekyll is a lightweight static web page generator, the site has to be built before uploading it...</p>
 </div>
@@ -708,7 +676,7 @@ Some of the listed videos contain motion graphics and animations within the line
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/spline/lines/interpolation/2022/07/15/spline_plot.html">Plotting Splines with Plotly and export into HTML</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/spline_plot.html">Plotting Splines with Plotly and export into HTML</a>
     <p>2022-07-15 09:56:49 +0200</p>
     <p>This spline plot has been generated using Plotly. There are many scenarios where a completly graphics engine is not necesary. Static visualization can be accomplished with simple libraries such as this one. Keep in mind what your target platforms for the plots are, and then have a look what fits...</p>
 </div>
@@ -720,7 +688,7 @@ Some of the listed videos contain motion graphics and animations within the line
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/bezier/spline/2021/11/20/Casteljau's-Algorithm.html">Casteljau's Algorithm</a>
+    <a href="https://waloncab.github.io/s.ln_blog/posts/Casteljau's-Algorithm.html">Casteljau's Algorithm</a>
     <p>2021-11-20 08:56:49 +0100</p>
     <p>Sometimes you need to define n-point curves, and generic bezier may fit your needs in those cases. The following lines of code represent how to design a generic bezier curve, n-grade curve. This algorithm uses recursion to iterate throw the entire interpolation points. Parameters: * points: the vector containing the...</p>
 </div>
