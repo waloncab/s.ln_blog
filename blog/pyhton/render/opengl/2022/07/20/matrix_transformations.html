@@ -478,9 +478,9 @@
 <p>Well, in any rendering engine, we require the following:</p>
 
 <ul>
-    <li>- translation</li>
-    <li>- rotation</li>
-    <li>- scale</li>
+    <li>translation</li>
+    <li>rotation</li>
+    <li>scale</li>
 </ul>
 
 <p> Keep reding the text and imagine that transformations are applied from the origin of the coordinate system (global coordinates), 
@@ -511,8 +511,8 @@ The following blocks of code create the most basic matrices in numpy arrays.
     <p>Storing the transformation in the model matrix allows : </p>
 
     <ul>
-        <li>- chain transformations by multiplying the model matrix of the object, the result matrix will store the acumulated transformatins.</li>
-        <li>- render a complex mesh without having to store the vertices of the mesh inside the object.</li>
+        <li>chain transformations by multiplying the model matrix of the object, the result matrix will store the acumulated transformatins.</li>
+        <li>render a complex mesh without having to store the vertices of the mesh inside the object.</li>
     </ul>
 
 <figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">def init_Identity():
@@ -613,13 +613,17 @@ def init_RotationZ(angle):
 
 <p>
     Perspective matrix for rendering the scene.
-    Frustum: truncated pyramid that defines the visible region.
-    Parameters:
-        - near / far distance: 
-        - angle of view: the angle between fron and bottom frustom planes.
-        - aspect ratio: width / height of the rendered image.
 </p>
 
+<ul>
+    <li>Frustum: truncated pyramid that defines the visible region.</li>
+    <li>Parameters</li>
+    <ul>
+        <li>near / far distance: </li>
+        <li>angle of view: the angle between fron and bottom frustom planes.</li>
+        <li>aspect ratio: width / height of the rendered image.</li>
+    </ul>
+    
 <figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">def init_Perspective(angleOfView=60, aspectRatio=1, near=0.1, far=1000):
 
     #convert to radians
