@@ -419,7 +419,7 @@
 
             <br>
 
-            <h1>DSL Fluent</h1>
+            <h1>Rendering Engine Architecture</h1>
 
 <!-- PAGE CATEGORIES -->
 
@@ -435,91 +435,29 @@
 
 
     <button type="button" 
-            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=software';">
-        software
+            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=jekyll';">
+        jekyll
+    </button> 
+
+
+
+    <button type="button" 
+            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=pyhton';">
+        pyhton
+    </button> 
+
+
+
+    <button type="button" 
+            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=git';">
+        git
     </button> 
 
 
 
 <hr>
 
-<p>We can define a domain-specific language (DSL) as a programming language specialized to a particular application domain.
-In this blog post we understand some key concepts and use cases inside the lines framework.</p>
 
-<p>An interface was needed for programable movement along lines. In this specific case a custom DSL
-allows to program simple instructions without understanding any of the inner working of the framework.</p>
-
-<p>There is a sharp definition between the general purpose language that host the framework and the
-domain specific language stored in scripts that can later be process. Encapsulating instructions in scripts 
-make this kind of code highly reusable along different components.</p>
-
-<p>We are using an expression builder to construct the graph that represents a movement state machine.
-In this case we are not working with simple value assignments or defined instructions. 
-The DSL represents a complex data structure, expression builders need to be defined 
-for each new sentence.</p>
-
-<p>Lets analyze a fluent API and the elements we are using here.</p>
-
-<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="n">ExpressionBuilder</span> <span class="n">builder</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">();</span>
-
-<span class="n">builder</span><span class="p">.</span><span class="nf">loop</span><span class="p">()</span>
-            <span class="p">.</span><span class="nf">times</span><span class="p">(</span><span class="m">5</span><span class="p">)</span>
-            <span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">()</span>
-                <span class="p">.</span><span class="nf">sequence</span><span class="p">()</span>
-                    <span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">().</span><span class="n">terminal</span><span class="p">&lt;</span><span class="n">MoveBuilder</span><span class="p">&gt;()</span>
-                            <span class="p">.</span><span class="nf">distance</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
-                        <span class="p">.</span><span class="nf">move_end</span><span class="p">()</span>
-                    <span class="p">)</span>
-                    <span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">().</span><span class="n">terminal</span><span class="p">&lt;</span><span class="n">MoveBuilder</span><span class="p">&gt;()</span>
-                            <span class="p">.</span><span class="nf">min</span><span class="p">(-</span><span class="m">5</span><span class="p">)</span>
-                            <span class="p">.</span><span class="nf">max</span><span class="p">(</span><span class="m">5</span><span class="p">)</span>
-                        <span class="p">.</span><span class="nf">move_end</span><span class="p">()</span>
-                    <span class="p">)</span>
-                    <span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">()</span>
-                        <span class="p">.</span><span class="nf">decide</span><span class="p">()</span>
-                            <span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="m">0.3f</span><span class="p">,</span> <span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">().</span><span class="n">terminal</span><span class="p">&lt;</span><span class="n">MoveBuilder</span><span class="p">&gt;()</span>
-                                    <span class="p">.</span><span class="nf">min</span><span class="p">(-</span><span class="m">8</span><span class="p">)</span>
-                                    <span class="p">.</span><span class="nf">max</span><span class="p">(</span><span class="m">8</span><span class="p">)</span>
-                                <span class="p">.</span><span class="nf">move_end</span><span class="p">()</span>
-                            <span class="p">)</span>
-                            <span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="m">0.7f</span><span class="p">,</span> <span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">().</span><span class="n">terminal</span><span class="p">&lt;</span><span class="n">MoveBuilder</span><span class="p">&gt;()</span>
-                                    <span class="p">.</span><span class="nf">distance</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>
-                                <span class="p">.</span><span class="nf">move_end</span><span class="p">()</span>
-                            <span class="p">)</span>
-                        <span class="p">.</span><span class="nf">decide_end</span><span class="p">()</span>
-                    <span class="p">)</span>
-                <span class="p">.</span><span class="nf">sequence_end</span><span class="p">()</span>
-            <span class="p">)</span>
-        <span class="p">.</span><span class="nf">loop_end</span><span class="p">()</span>
-    <span class="p">.</span><span class="nf">end</span><span class="p">();</span>
-
-<span class="k">return</span> <span class="n">builder</span><span class="p">.</span><span class="nf">Generate</span><span class="p">();</span></code></pre></figure>
-
-<p>This expression tree builds a complex graph State-Machine.
-The fluent interface allows to link instructions in a natural expressive way.
-Notice the difference between the terminal and non-terminal expressions.</p>
-
-<ul>
-  <li>
-    <p>Terminal:
-  Represent the behavior we want to add to the graph.</p>
-  </li>
-  <li>
-    <p>Non-Terminal:
-  Integrate flow control with elements such as loop, sequences and decisions.</p>
-  </li>
-</ul>
-
-<p>Fluent APIs are popular among DSL, according to Wikipedia a fluent API is a way of implementing 
-object oriented code with a more natural and human readable interface. 
-Method chaining is used to relay the instruction context of a subsequent expression.
-But there are more elements to consider in those concrete languages.</p>
-
-<ul>
-  <li>Method Chaining</li>
-  <li>Method Cascading</li>
-  <li>Progressive Interfaces</li>
-</ul>
 
 
 <!-- INCLUDE spline / procedural -->
@@ -543,7 +481,8 @@ But there are more elements to consider in those concrete languages.</p>
 <div class="post">
     <a href="https://waloncab.github.io/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/rendering_engine_architecture.html">Rendering Engine Architecture</a>
     <p>2022-07-20 17:00:00 +0200</p>
-    <p></p>
+    <p>
+</p>
 </div>
             
         <br>
@@ -591,7 +530,7 @@ But there are more elements to consider in those concrete languages.</p>
 <div class="post">
     <a href="https://waloncab.github.io/s.ln_blog/blog/bezier/spline/2021/11/20/Casteljau's-Algorithm.html">Casteljau's Algorithm</a>
     <p>2021-11-20 08:56:49 +0100</p>
-    <p>Sometimes you need to define n-point curves, and generic bezier may fit your needs in those cases. The following lines of code represent how to design a generic bezier curve, n-grade curve. This algorithm uses recursion to iterate throw the entire interpolation points. Parameters: * points: the vector containing the...</p>
+    <p>Sometimes you need to define n-point curves, and generic bezier may fit your needs in those cases. The following lines of code represent how to design a generic bezier curve, n-grade curve. This algorithm uses recursion to iterate throw the entire interpolation points. Parameters: points: the vector containing the curve...</p>
 </div>
             
         <br>

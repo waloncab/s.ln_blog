@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/" rel="alternate" type="text/html" /><updated>2022-07-21T11:02:49+02:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/feed.xml</id><title type="html">walon/cab:s.ln_blog</title><subtitle>Graphics rendering and spline algorithms. Kinematics from the bezier curves by  traversing generated paths, then embedding them into rendering and game engines. Stay tunned for the Spline Lab!</subtitle><entry><title type="html">Matrix_transformations</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/2022/07/21/matrix_transformations.html" rel="alternate" type="text/html" title="Matrix_transformations" /><published>2022-07-21T00:00:00+02:00</published><updated>2022-07-21T00:00:00+02:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/2022/07/21/matrix_transformations</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/2022/07/21/matrix_transformations.html"><![CDATA[]]></content><author><name></name></author><category term="blog" /></entry><entry><title type="html">Git Commit Automation with Python</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/git_automation.html" rel="alternate" type="text/html" title="Git Commit Automation with Python" /><published>2022-07-20T17:00:00+02:00</published><updated>2022-07-20T17:00:00+02:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/git_automation</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/git_automation.html"><![CDATA[<p>This web page is a complex piece of software. There are a few layers that composes the web, having jekyll as the backend and standard html, css, and javascript on the front-end.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/" rel="alternate" type="text/html" /><updated>2022-07-23T12:01:50+02:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/feed.xml</id><title type="html">walon/cab:s.ln_blog</title><subtitle>Graphics rendering and spline algorithms. Kinematics from the bezier curves by  traversing generated paths, then embedding them into rendering and game engines. Stay tunned for the Spline Lab!</subtitle><entry><title type="html">Git Commit Automation with Python</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/git_automation.html" rel="alternate" type="text/html" title="Git Commit Automation with Python" /><published>2022-07-20T17:00:00+02:00</published><updated>2022-07-20T17:00:00+02:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/git_automation</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/git_automation.html"><![CDATA[<p>This web page is a complex piece of software. There are a few layers that composes the web, having jekyll as the backend and standard html, css, and javascript on the front-end.
 Since jekyll is a lightweight static web page generator, the site has to be built before uploading it to any remote server. This is a very repetitive process that could be automated.
 In this blog post we are going to see a simple way to use git version control from Pyhton and upload the built web-page to github and then enable github-pages.</p>
 
@@ -10,7 +10,7 @@ In this blog post we are going to see a simple way to use git version control fr
   <li>automate the git commit with the following lines of code.</li>
 </ul>
 
-<p>Make sure you have previously installed the corresponding git package into your Pyhton ( use pip install )</p>
+<p>Make sure you have previously installed the corresponding git package into your Python ( use pip install )</p>
 
 <figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">    pip install GitPython</code></pre></figure>
 
@@ -39,7 +39,183 @@ repo.git.add(all=True)
 diff = repo.git.diff(repo.head.commit.tree)
 
 # commit
-repo.index.commit(rand_commit_m)</code></pre></figure>]]></content><author><name>waloncab</name></author><category term="blog" /><category term="jekyll" /><category term="pyhton" /><category term="git" /><summary type="html"><![CDATA[This web page is a complex piece of software. There are a few layers that composes the web, having jekyll as the backend and standard html, css, and javascript on the front-end. Since jekyll is a lightweight static web page generator, the site has to be built before uploading it to any remote server. This is a very repetitive process that could be automated. In this blog post we are going to see a simple way to use git version control from Pyhton and upload the built web-page to github and then enable github-pages. Steps: use [ jekyll bundle build ] to build the web page into the _site folder. copy the _site folder to some other folder and start a git repository in there. automate the git commit with the following lines of code. Make sure you have previously installed the corresponding git package into your Pyhton ( use pip install ) pip install GitPython The following lines specify the basic operations that can be done with your repository. Here, a random word function is being used to generate the commit identification message. repo = Repo('/your_site_path') # list all branches for branch in repo.branches: print(branch) def randomword(length): letters = string.ascii_lowercase return ''.join(random.choice(letters) for i in range(length)) rand_commit_m = randomword(8) # to checkout to a branch: repo.git.checkout('master') # add files repo.git.add(all=True) # check differences between current files and last commit diff = repo.git.diff(repo.head.commit.tree) # commit repo.index.commit(rand_commit_m)]]></summary></entry><entry><title type="html">Plotting Splines with Plotly and export into HTML</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/spline/lines/interpolation/2022/07/15/spline_plot.html" rel="alternate" type="text/html" title="Plotting Splines with Plotly and export into HTML" /><published>2022-07-15T09:56:49+02:00</published><updated>2022-07-15T09:56:49+02:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/spline/lines/interpolation/2022/07/15/spline_plot</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/spline/lines/interpolation/2022/07/15/spline_plot.html"><![CDATA[<div>                        
+repo.index.commit(rand_commit_m)</code></pre></figure>]]></content><author><name>waloncab</name></author><category term="blog" /><category term="jekyll" /><category term="pyhton" /><category term="git" /><summary type="html"><![CDATA[This web page is a complex piece of software. There are a few layers that composes the web, having jekyll as the backend and standard html, css, and javascript on the front-end. Since jekyll is a lightweight static web page generator, the site has to be built before uploading it to any remote server. This is a very repetitive process that could be automated. In this blog post we are going to see a simple way to use git version control from Pyhton and upload the built web-page to github and then enable github-pages. Steps: use [ jekyll bundle build ] to build the web page into the _site folder. copy the _site folder to some other folder and start a git repository in there. automate the git commit with the following lines of code. Make sure you have previously installed the corresponding git package into your Python ( use pip install ) pip install GitPython The following lines specify the basic operations that can be done with your repository. Here, a random word function is being used to generate the commit identification message. repo = Repo('/your_site_path') # list all branches for branch in repo.branches: print(branch) def randomword(length): letters = string.ascii_lowercase return ''.join(random.choice(letters) for i in range(length)) rand_commit_m = randomword(8) # to checkout to a branch: repo.git.checkout('master') # add files repo.git.add(all=True) # check differences between current files and last commit diff = repo.git.diff(repo.head.commit.tree) # commit repo.index.commit(rand_commit_m)]]></summary></entry><entry><title type="html">Rendering Engine Architecture</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/rendering_engine_architecture.html" rel="alternate" type="text/html" title="Rendering Engine Architecture" /><published>2022-07-20T17:00:00+02:00</published><updated>2022-07-20T17:00:00+02:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/rendering_engine_architecture</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/rendering_engine_architecture.html"><![CDATA[]]></content><author><name>waloncab</name></author><category term="blog" /><category term="jekyll" /><category term="pyhton" /><category term="git" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Matrix Transformation for Rendering 3D objects</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/matrix_transformations.html" rel="alternate" type="text/html" title="Matrix Transformation for Rendering 3D objects" /><published>2022-07-20T17:00:00+02:00</published><updated>2022-07-20T17:00:00+02:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/matrix_transformations</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/matrix_transformations.html"><![CDATA[<h3> Matrix Transformations & Rendering 3D</h3>
+
+<p>
+    Transformations are at the core of any rendering engine. 
+    Vectors and matrices are the basic data structures that allow to
+    desgin and create functions to transform set of points 
+    in certain geometric way.
+</p>
+
+<h3> Points / Vectors / Matrices</h3>
+<p>
+    Both points and vectors are represented by a list of numbers, but they have different geometric interpretations.
+    Points are simple a defined position in a space but vectors represent a direction within that space.
+    Matrices are the best mathematical construct to apply transformations to the points and vectors, GPUs are highly optimized
+    to compute matrix multiplications in parallel.
+</p>
+
+<h3> What kind of operations are needed in the 3D space ? </h3>
+
+<p>Well, in any rendering engine, we require the following:</p>
+
+- translation
+- rotation
+- scale
+
+<p> Keep reding the text and imagine that transformations are applied from the origin of the coordinate system (global coordinates), 
+    we'll consider local transformations later  </p>
+
+<h3>4x4 Matrix in a 3D Space</h3>
+
+<p> <a href="https://en.wikipedia.org/wiki/Homogeneous_coordinates">homogeneuos coordinates</a> are a system of coordinates used in projective geometry.
+    They have the advantage that the coordinates of points, including points at infinity, can be represented using finite coordinates.
+    Since translation is not a linear transformation we need to embed 3x3 matrices in a 4x4 matrices, <a href="https://en.wikipedia.org/wiki/Translation_(geometry)">find out why</a>
+</p>
+
+<h3> Basic Transformation Matrices</h3>
+
+<p>
+For any given object we need to translate, rotate, and scale. Each one of this scene objects need to store transformation data in a 4x4 matrix. 
+The matrix multiplication allow to easily modify the transformation data the object stores.
+The following blocks of code create the most basic matrices in numpy arrays.
+</p>
+
+<h3>Model Matrix</h3>
+
+    <p>
+    A matrix is used to store the transformation of any object, but what about the points / vertices of that object in the case that 
+    it renders some kind of mesh ?
+    </p>
+
+    <p>Storing the transformation in the model matrix allows : </p>
+
+    <ul>
+        <li>- chain transformations by multiplying the model matrix of the object, the result matrix will store the acumulated transformatins.</li>
+        <li>- render a complex mesh without having to store the vertices of the mesh inside the object.</li>
+    </ul>
+
+<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">def init_Identity():
+
+    return np.array( [
+        [1, 0, 0, 0],
+        [0, 1, 0, 0],
+        [0 ,0, 1, 0],
+        [0, 0, 0, 1]
+    ]).astype(float)</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">def init_Translation(x,y,z):
+
+    return np.array( [
+        [1, 0, 0, x],
+        [0, 1, 0, y],
+        [0 ,0, 1, z],
+        [0, 0, 0, 1]
+    ]).astype(float)</code></pre></figure>
+
+<p>
+    The followings lines of code represent the rotation matrices for the x,y,z axes.
+    Rotation happens around an axis, and the rotation matrix does not move the axis.
+    Rotation can be produced arond any vector, but we are considering just the rotation around the 
+    basis vectors (axis) since other roations can be derived later from the world matrix.
+</p>
+
+<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">def init_RotationX(angle):
+
+    c = cos(angle)
+    s = sin(angle)
+
+    return np.array( [
+        [1, 0,  0, 0],
+        [0, c, -s, 0],
+        [0 ,s,  c, 0],
+        [0, 0,  0, 1]
+    ]).astype(float)
+
+def init_RotationY(angle):
+
+    c = cos(angle)
+    s = sin(angle)
+
+    return np.array( [
+        [ c, 0, s, 0],
+        [ 0, 1, 0, 0],
+        [-s ,0, c, 0],
+        [ 0, 0, 0, 1]
+    ]).astype(float)
+
+def init_RotationZ(angle):
+
+    c = cos(angle)
+    s = sin(angle)
+
+    return np.array( [
+        [c, -s, 0, 0],
+        [s, c, 0, 0],
+        [0 ,0, 1, 0],
+        [0, 0, 0, 1]
+    ]).astype(float)</code></pre></figure>
+
+<p>
+    This scale matrix only accepts one parameter scaling the object uniformly along the x,y, axes.
+</p>
+
+<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">def init_Scale(s):
+
+    return np.array( [
+        [s, 0, 0, 0],
+        [0, s, 0, 0],
+        [0 ,0, s, 0],
+        [0, 0, 0, 1]
+    ]).astype(float)</code></pre></figure>
+
+<h3> Local vs Global Coordinates </h3>
+
+<p>
+    When we multiply any of the previous matrices by some point we are transforming that point in a global coordinate system (Origin(0,0,0)). 
+    For example, when multiplying a point by the translation matrix the point moves along the basis x,y,z axis.
+    Local transformations requiere to define an internal local coordinate system. Origin, orientation, and scale of the
+    local coordinate axes are chosen for conviniece, but usually the center of the object is selected to transform locally.
+</p>
+
+<h3> How to use matrix multiplication to perform transformations in local coordinate systems </h3>
+
+    <p>
+        Let's keep it simple, in order to perform any global transformation we chain matrix multiplications on the left side of expression.
+        To achive local transformations just multiply on the right side of the expression. 
+        Keep in mind that matrix multiplication is not commutative: A*B != B*A 
+    </p>
+
+    <ul>
+        <li>Global Transformation: T3 * T2 * T1 * M(model_matrix)</li>
+        <li>Local Transformation: M(model_matrix) * T1 * T2 * T3</li>
+    </ul>
+
+<p>
+    Perspective matrix for rendering the scene.
+    Frustum: truncated pyramid that defines the visible region.
+    Parameters:
+        - near / far distance: 
+        - angle of view: the angle between fron and bottom frustom planes.
+        - aspect ratio: width / height of the rendered image.
+</p>
+
+<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">def init_Perspective(angleOfView=60, aspectRatio=1, near=0.1, far=1000):
+
+    #convert to radians
+    a = angleOfView *pi/180
+    d = 1.0 / tan(a/2)
+    r = aspectRatio
+    b = (far + near) / (near - far)
+    c =  2 * far * near / (near - far)
+
+    return np.array( [
+        [d/r, 0, 0, 0],
+        [0, d, 0, 0],
+        [0 ,0, b, c],
+        [0, 0, -1, 0]
+    ]).astype(float)</code></pre></figure>]]></content><author><name>waloncab</name></author><category term="blog" /><category term="jekyll" /><category term="pyhton" /><category term="git" /><summary type="html"><![CDATA[Matrix Transformations & Rendering 3D Transformations are at the core of any rendering engine. Vectors and matrices are the basic data structures that allow to desgin and create functions to transform set of points in certain geometric way. Points / Vectors / Matrices Both points and vectors are represented by a list of numbers, but they have different geometric interpretations. Points are simple a defined position in a space but vectors represent a direction within that space. Matrices are the best mathematical construct to apply transformations to the points and vectors, GPUs are highly optimized to compute matrix multiplications in parallel. What kind of operations are needed in the 3D space ? Well, in any rendering engine, we require the following: - translation - rotation - scale Keep reding the text and imagine that transformations are applied from the origin of the coordinate system (global coordinates), we'll consider local transformations later 4x4 Matrix in a 3D Space homogeneuos coordinates are a system of coordinates used in projective geometry. They have the advantage that the coordinates of points, including points at infinity, can be represented using finite coordinates. Since translation is not a linear transformation we need to embed 3x3 matrices in a 4x4 matrices, find out why Basic Transformation Matrices For any given object we need to translate, rotate, and scale. Each one of this scene objects need to store transformation data in a 4x4 matrix. The matrix multiplication allow to easily modify the transformation data the object stores. The following blocks of code create the most basic matrices in numpy arrays. Model Matrix A matrix is used to store the transformation of any object, but what about the points / vertices of that object in the case that it renders some kind of mesh ? Storing the transformation in the model matrix allows : - chain transformations by multiplying the model matrix of the object, the result matrix will store the acumulated transformatins. - render a complex mesh without having to store the vertices of the mesh inside the object. def init_Identity(): return np.array( [ [1, 0, 0, 0], [0, 1, 0, 0], [0 ,0, 1, 0], [0, 0, 0, 1] ]).astype(float) def init_Translation(x,y,z): return np.array( [ [1, 0, 0, x], [0, 1, 0, y], [0 ,0, 1, z], [0, 0, 0, 1] ]).astype(float) The followings lines of code represent the rotation matrices for the x,y,z axes. Rotation happens around an axis, and the rotation matrix does not move the axis. Rotation can be produced arond any vector, but we are considering just the rotation around the basis vectors (axis) since other roations can be derived later from the world matrix. def init_RotationX(angle): c = cos(angle) s = sin(angle) return np.array( [ [1, 0, 0, 0], [0, c, -s, 0], [0 ,s, c, 0], [0, 0, 0, 1] ]).astype(float) def init_RotationY(angle): c = cos(angle) s = sin(angle) return np.array( [ [ c, 0, s, 0], [ 0, 1, 0, 0], [-s ,0, c, 0], [ 0, 0, 0, 1] ]).astype(float) def init_RotationZ(angle): c = cos(angle) s = sin(angle) return np.array( [ [c, -s, 0, 0], [s, c, 0, 0], [0 ,0, 1, 0], [0, 0, 0, 1] ]).astype(float) This scale matrix only accepts one parameter scaling the object uniformly along the x,y, axes. def init_Scale(s): return np.array( [ [s, 0, 0, 0], [0, s, 0, 0], [0 ,0, s, 0], [0, 0, 0, 1] ]).astype(float) Local vs Global Coordinates When we multiply any of the previous matrices by some point we are transforming that point in a global coordinate system (Origin(0,0,0)). For example, when multiplying a point by the translation matrix the point moves along the basis x,y,z axis. Local transformations requiere to define an internal local coordinate system. Origin, orientation, and scale of the local coordinate axes are chosen for conviniece, but usually the center of the object is selected to transform locally. How to use matrix multiplication to perform transformations in local coordinate systems Let's keep it simple, in order to perform any global transformation we chain matrix multiplications on the left side of expression. To achive local transformations just multiply on the right side of the expression. Keep in mind that matrix multiplication is not commutative: A*B != B*A Global Transformation: T3 * T2 * T1 * M(model_matrix) Local Transformation: M(model_matrix) * T1 * T2 * T3 Perspective matrix for rendering the scene. Frustum: truncated pyramid that defines the visible region. Parameters: - near / far distance: - angle of view: the angle between fron and bottom frustom planes. - aspect ratio: width / height of the rendered image. def init_Perspective(angleOfView=60, aspectRatio=1, near=0.1, far=1000): #convert to radians a = angleOfView *pi/180 d = 1.0 / tan(a/2) r = aspectRatio b = (far + near) / (near - far) c = 2 * far * near / (near - far) return np.array( [ [d/r, 0, 0, 0], [0, d, 0, 0], [0 ,0, b, c], [0, 0, -1, 0] ]).astype(float)]]></summary></entry><entry><title type="html">Plotting Splines with Plotly and export into HTML</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/spline/lines/interpolation/2022/07/15/spline_plot.html" rel="alternate" type="text/html" title="Plotting Splines with Plotly and export into HTML" /><published>2022-07-15T09:56:49+02:00</published><updated>2022-07-15T09:56:49+02:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/spline/lines/interpolation/2022/07/15/spline_plot</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/blog/spline/lines/interpolation/2022/07/15/spline_plot.html"><![CDATA[<div>                        
         <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
         <script src="https://cdn.plot.ly/plotly-2.12.1.min.js"></script>                
         <div id="548b1779-dc2c-4101-9c59-907e69a2822c" class="plotly-graph-div" style="height:100%; width:100%;"></div>            
@@ -56,44 +232,54 @@ repo.index.commit(rand_commit_m)</code></pre></figure>]]></content><author><name
     </p>
 
     <p>
-        <figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">        import plotly.express as px
-        
-        fig = px.line(
-            x = np.squeeze(np.asarray(X)), 
-            y = np.squeeze(np.asarray(Y))
-            )
+        Now we are going to plot the data. Transform it into X and Y components, then use the Plotly commands to setup the axis and show it.
+        This code has been copied from Jupyter notebook cell, use this notebooks to keep code and plotting data organized before auploading to remote servers.
+    </p>
 
-        # scale the axis properly
-
-        fig.update_yaxes(
-            scaleanchor = "x",
-            scaleratio = 1,
+    <figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">    import plotly.express as px
+    
+    fig = px.line(
+        x = np.squeeze(np.asarray(X)), 
+        y = np.squeeze(np.asarray(Y))
         )
-        
-        fig.show()
 
-        </code></pre></figure>
-    </p>]]></content><author><name>waloncab</name></author><category term="blog" /><category term="spline" /><category term="lines" /><category term="interpolation" /><summary type="html"><![CDATA[This spline plot has been generated using Plotly. There are many scenarios where a completly graphics engine is not necesary. Static visualization can be accomplished with simple libraries such as this one. Keep in mind what your target platforms for the plots are, and then have a look what fits your project best. In this case plotly instead of matplotlib or seaborn, allow simple html export with the full plotting toolbar. This small features make a difference when it comes to the export, have a look at the documentation import plotly.express as px fig = px.line( x = np.squeeze(np.asarray(X)), y = np.squeeze(np.asarray(Y)) ) # scale the axis properly fig.update_yaxes( scaleanchor = "x", scaleratio = 1, ) fig.show()]]></summary></entry><entry><title type="html">Audio Visualization sp.002</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/audio/visualization/2021/12/05/audio-visualization-003.html" rel="alternate" type="text/html" title="Audio Visualization sp.002" /><published>2021-12-05T10:44:49+01:00</published><updated>2021-12-05T10:44:49+01:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/audio/visualization/2021/12/05/audio-visualization-003</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/audio/visualization/2021/12/05/audio-visualization-003.html"><![CDATA[<p>Piano key strokes are more fun when you visualize in some form or another the sound produced.
+    # scale the axis properly
+
+    fig.update_yaxes(
+        scaleanchor = "x",
+        scaleratio = 1,
+    )
+    
+    fig.show()
+
+    </code></pre></figure>
+
+    <p>
+        After plotting the data, we need to export the generated graph to an html format. The following snippet does so.
+    </p>
+
+    <figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">    fig.write_html("./exported/random_0.html",
+    full_html=False,
+    include_plotlyjs='cdn')
+
+    </code></pre></figure>]]></content><author><name>waloncab</name></author><category term="blog" /><category term="spline" /><category term="lines" /><category term="interpolation" /><summary type="html"><![CDATA[This spline plot has been generated using Plotly. There are many scenarios where a completly graphics engine is not necesary. Static visualization can be accomplished with simple libraries such as this one. Keep in mind what your target platforms for the plots are, and then have a look what fits your project best. In this case plotly instead of matplotlib or seaborn, allow simple html export with the full plotting toolbar. This small features make a difference when it comes to the export, have a look at the documentation Now we are going to plot the data. Transform it into X and Y components, then use the Plotly commands to setup the axis and show it. This code has been copied from Jupyter notebook cell, use this notebooks to keep code and plotting data organized before auploading to remote servers. import plotly.express as px fig = px.line( x = np.squeeze(np.asarray(X)), y = np.squeeze(np.asarray(Y)) ) # scale the axis properly fig.update_yaxes( scaleanchor = "x", scaleratio = 1, ) fig.show() After plotting the data, we need to export the generated graph to an html format. The following snippet does so. fig.write_html("./exported/random_0.html", full_html=False, include_plotlyjs='cdn')]]></summary></entry><entry><title type="html">Audio Visualization sp.002</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/audio/visualization/2021/12/05/audio-visualization-003.html" rel="alternate" type="text/html" title="Audio Visualization sp.002" /><published>2021-12-05T10:44:49+01:00</published><updated>2021-12-05T10:44:49+01:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/audio/visualization/2021/12/05/audio-visualization-003</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/audio/visualization/2021/12/05/audio-visualization-003.html"><![CDATA[<p>Piano key strokes are more fun when you visualize in some form or another the sound produced.
 Closed spline shape rendered along this small piano track, notice the small fast waves the contour forms.
 Very pleasant effect that could be applied to many more music tracks like this.</p>]]></content><author><name>waloncab</name></author><category term="demos" /><category term="audio" /><category term="visualization" /><summary type="html"><![CDATA[Piano key strokes are more fun when you visualize in some form or another the sound produced. Closed spline shape rendered along this small piano track, notice the small fast waves the contour forms. Very pleasant effect that could be applied to many more music tracks like this.]]></summary></entry><entry><title type="html">Audio Visualization sp.002</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/audio/visualization/2021/12/04/audio-visualization-002.html" rel="alternate" type="text/html" title="Audio Visualization sp.002" /><published>2021-12-04T10:44:49+01:00</published><updated>2021-12-04T10:44:49+01:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/audio/visualization/2021/12/04/audio-visualization-002</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/audio/visualization/2021/12/04/audio-visualization-002.html"><![CDATA[<p>Everything you see in the video is generated at run-time. This time the audio visualizer uses 
 not just a simple mesh but a line renderer to distinguish the contour of the shape.
 The drums make the shape generate aggressive but very pleasant curves.</p>]]></content><author><name>waloncab</name></author><category term="demos" /><category term="audio" /><category term="visualization" /><summary type="html"><![CDATA[Everything you see in the video is generated at run-time. This time the audio visualizer uses not just a simple mesh but a line renderer to distinguish the contour of the shape. The drums make the shape generate aggressive but very pleasant curves.]]></summary></entry><entry><title type="html">Audio Visualization sp.001</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/audio/visualization/2021/12/03/audio-visualization-001.html" rel="alternate" type="text/html" title="Audio Visualization sp.001" /><published>2021-12-03T10:44:49+01:00</published><updated>2021-12-03T10:44:49+01:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/audio/visualization/2021/12/03/audio-visualization-001</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/audio/visualization/2021/12/03/audio-visualization-001.html"><![CDATA[<p>This video demonstrates how frequency bands can be used to make dynamic meshes. 
 The mesh is modified at real-time by a redial disposition of those bands.
 Notice that the code for this representation is being optimized since modifying a mesh every frame 
-is an expensive task no matter how simple the mesh might be.</p>]]></content><author><name>waloncab</name></author><category term="demos" /><category term="audio" /><category term="visualization" /><summary type="html"><![CDATA[This video demonstrates how frequency bands can be used to make dynamic meshes. The mesh is modified at real-time by a redial disposition of those bands. Notice that the code for this representation is being optimized since modifying a mesh every frame is an expensive task no matter how simple the mesh might be.]]></summary></entry><entry><title type="html">Reel Showcase</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/procedural/2021/11/25/demo_reel-AAA.html" rel="alternate" type="text/html" title="Reel Showcase" /><published>2021-11-25T10:44:49+01:00</published><updated>2021-11-25T10:44:49+01:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/procedural/2021/11/25/demo_reel-AAA</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/procedural/2021/11/25/demo_reel-AAA.html"><![CDATA[<p>
-This video shows how the project is growing. Traversing splines in real time is hard, it takes certain amount of computational effort.
-So in order to handle all of this movement without lag, a parallel approach has been introduced to certain algorithms.
-</p>]]></content><author><name>waloncab</name></author><category term="demos" /><category term="spline" /><category term="procedural" /><summary type="html"><![CDATA[This video shows how the project is growing. Traversing splines in real time is hard, it takes certain amount of computational effort. So in order to handle all of this movement without lag, a parallel approach has been introduced to certain algorithms.]]></summary></entry><entry><title type="html">Reel Showcase</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/breath-animation.html" rel="alternate" type="text/html" title="Reel Showcase" /><published>2021-11-25T10:44:49+01:00</published><updated>2021-11-25T10:44:49+01:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/breath-animation</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/breath-animation.html"><![CDATA[<p>This time with breathing graphics, real time parallel processing for dynamic spline follow.
-Closed loop behavior algorithm allows to follow any closed line shape at a constant speed. 
-One big challenge is keep the iteration distance independent from the actual spline path that we’re iterating through.</p>
-
-<p>Stay tuned for more videos like this, the spline lab is working on awesome new stuff.</p>]]></content><author><name>waloncab</name></author><category term="demos" /><category term="spline" /><summary type="html"><![CDATA[This time with breathing graphics, real time parallel processing for dynamic spline follow. Closed loop behavior algorithm allows to follow any closed line shape at a constant speed. One big challenge is keep the iteration distance independent from the actual spline path that we’re iterating through.]]></summary></entry><entry><title type="html">Organic Algorithms</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/organic-algorithms.html" rel="alternate" type="text/html" title="Organic Algorithms" /><published>2021-11-25T10:44:49+01:00</published><updated>2021-11-25T10:44:49+01:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/organic-algorithms</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/organic-algorithms.html"><![CDATA[<p>
+is an expensive task no matter how simple the mesh might be.</p>]]></content><author><name>waloncab</name></author><category term="demos" /><category term="audio" /><category term="visualization" /><summary type="html"><![CDATA[This video demonstrates how frequency bands can be used to make dynamic meshes. The mesh is modified at real-time by a redial disposition of those bands. Notice that the code for this representation is being optimized since modifying a mesh every frame is an expensive task no matter how simple the mesh might be.]]></summary></entry><entry><title type="html">Organic Algorithms</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/organic-algorithms.html" rel="alternate" type="text/html" title="Organic Algorithms" /><published>2021-11-25T10:44:49+01:00</published><updated>2021-11-25T10:44:49+01:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/organic-algorithms</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/organic-algorithms.html"><![CDATA[<p>
     Splines are some of the most organic pieces of graphics sofware you can find out there.
     This video is about how to add organic movement to the points conforming the line shape.
     Kinematic alogorithms use different interpolation methods to transport the spline dots smothly in space. 
     When we combine the lerp effect with some random seed generation to determine where to move the desired dot, 
     we achive some result similar to the one in the video. The spline lab is working on awesome new stuff.
-</p>]]></content><author><name>waloncab</name></author><category term="demos" /><category term="spline" /><summary type="html"><![CDATA[Splines are some of the most organic pieces of graphics sofware you can find out there. This video is about how to add organic movement to the points conforming the line shape. Kinematic alogorithms use different interpolation methods to transport the spline dots smothly in space. When we combine the lerp effect with some random seed generation to determine where to move the desired dot, we achive some result similar to the one in the video. The spline lab is working on awesome new stuff.]]></summary></entry><entry><title type="html">Motion Graphics</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/motion-graphics.html" rel="alternate" type="text/html" title="Motion Graphics" /><published>2021-11-25T10:44:49+01:00</published><updated>2021-11-25T10:44:49+01:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/motion-graphics</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/motion-graphics.html"><![CDATA[<p>
+</p>]]></content><author><name>waloncab</name></author><category term="demos" /><category term="spline" /><summary type="html"><![CDATA[Splines are some of the most organic pieces of graphics sofware you can find out there. This video is about how to add organic movement to the points conforming the line shape. Kinematic alogorithms use different interpolation methods to transport the spline dots smothly in space. When we combine the lerp effect with some random seed generation to determine where to move the desired dot, we achive some result similar to the one in the video. The spline lab is working on awesome new stuff.]]></summary></entry><entry><title type="html">Reel Showcase</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/breath-animation.html" rel="alternate" type="text/html" title="Reel Showcase" /><published>2021-11-25T10:44:49+01:00</published><updated>2021-11-25T10:44:49+01:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/breath-animation</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/breath-animation.html"><![CDATA[<p>This time with breathing graphics, real time parallel processing for dynamic spline follow.
+Closed loop behavior algorithm allows to follow any closed line shape at a constant speed. 
+One big challenge is keep the iteration distance independent from the actual spline path that we’re iterating through.</p>
+
+<p>Stay tuned for more videos like this, the spline lab is working on awesome new stuff.</p>]]></content><author><name>waloncab</name></author><category term="demos" /><category term="spline" /><summary type="html"><![CDATA[This time with breathing graphics, real time parallel processing for dynamic spline follow. Closed loop behavior algorithm allows to follow any closed line shape at a constant speed. One big challenge is keep the iteration distance independent from the actual spline path that we’re iterating through.]]></summary></entry><entry><title type="html">Motion Graphics</title><link href="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/motion-graphics.html" rel="alternate" type="text/html" title="Motion Graphics" /><published>2021-11-25T10:44:49+01:00</published><updated>2021-11-25T10:44:49+01:00</updated><id>https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/motion-graphics</id><content type="html" xml:base="https://waloncab.github.io/s.ln_blog/s.ln_blog/demos/spline/2021/11/25/motion-graphics.html"><![CDATA[<p>
     Scaling the project to handle different types of lines and the technology around them. 
     ollowing path behavior within procedural line animations to make pleasant effects.
 </p>

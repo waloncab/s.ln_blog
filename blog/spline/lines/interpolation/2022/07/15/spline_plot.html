@@ -474,24 +474,38 @@
     </p>
 
     <p>
-        <figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">        import plotly.express as px
-        
-        fig = px.line(
-            x = np.squeeze(np.asarray(X)), 
-            y = np.squeeze(np.asarray(Y))
-            )
-
-        # scale the axis properly
-
-        fig.update_yaxes(
-            scaleanchor = "x",
-            scaleratio = 1,
-        )
-        
-        fig.show()
-
-        </code></pre></figure>
+        Now we are going to plot the data. Transform it into X and Y components, then use the Plotly commands to setup the axis and show it.
+        This code has been copied from Jupyter notebook cell, use this notebooks to keep code and plotting data organized before auploading to remote servers.
     </p>
+
+    <figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">    import plotly.express as px
+    
+    fig = px.line(
+        x = np.squeeze(np.asarray(X)), 
+        y = np.squeeze(np.asarray(Y))
+        )
+
+    # scale the axis properly
+
+    fig.update_yaxes(
+        scaleanchor = "x",
+        scaleratio = 1,
+    )
+    
+    fig.show()
+
+    </code></pre></figure>
+
+    <p>
+        After plotting the data, we need to export the generated graph to an html format. The following snippet does so.
+    </p>
+
+    <figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">    fig.write_html("./exported/random_0.html",
+    full_html=False,
+    include_plotlyjs='cdn')
+
+    </code></pre></figure>
+
 
 
 <!-- INCLUDE spline / procedural -->
@@ -644,9 +658,21 @@ Some of the listed videos contain motion graphics and animations within the line
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/2022/07/21/matrix_transformations.html">Matrix_transformations</a>
-    <p>2022-07-21 00:00:00 +0200</p>
+    <a href="https://waloncab.github.io/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/rendering_engine_architecture.html">Rendering Engine Architecture</a>
+    <p>2022-07-20 17:00:00 +0200</p>
     <p></p>
+</div>
+            
+        <br>
+
+    
+
+        <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
+
+<div class="post">
+    <a href="https://waloncab.github.io/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/matrix_transformations.html">Matrix Transformation for Rendering 3D objects</a>
+    <p>2022-07-20 17:00:00 +0200</p>
+    <p>Matrix Transformations & Rendering 3D Transformations are at the core of any rendering engine. Vectors and matrices are the basic data structures that allow to desgin and create functions to transform set of points in certain geometric way. Points / Vectors / Matrices Both points and vectors are represented by...</p>
 </div>
             
         <br>
@@ -683,18 +709,6 @@ Some of the listed videos contain motion graphics and animations within the line
     <a href="https://waloncab.github.io/s.ln_blog/blog/bezier/spline/2021/11/20/Casteljau's-Algorithm.html">Casteljau's Algorithm</a>
     <p>2021-11-20 08:56:49 +0100</p>
     <p>Sometimes you need to define n-point curves, and generic bezier may fit your needs in those cases. The following lines of code represent how to design a generic bezier curve, n-grade curve. This algorithm uses recursion to iterate throw the entire interpolation points. Parameters: points: the vector containing the curve...</p>
-</div>
-            
-        <br>
-
-    
-
-        <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
-
-<div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/software/2021/11/19/DSL-Fluent.html">DSL Fluent</a>
-    <p>2021-11-19 08:56:49 +0100</p>
-    <p>We can define a domain-specific language (DSL) as a programming language specialized to a particular application domain. In this blog post we understand some key concepts and use cases inside the lines framework. An interface was needed for programable movement along lines. In this specific case a custom DSL allows...</p>
 </div>
             
         <br>

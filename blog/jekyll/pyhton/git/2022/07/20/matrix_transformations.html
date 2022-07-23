@@ -419,7 +419,7 @@
 
             <br>
 
-            <h1>DSL Fluent</h1>
+            <h1>Matrix Transformation for Rendering 3D objects</h1>
 
 <!-- PAGE CATEGORIES -->
 
@@ -435,92 +435,205 @@
 
 
     <button type="button" 
-            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=software';">
-        software
+            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=jekyll';">
+        jekyll
+    </button> 
+
+
+
+    <button type="button" 
+            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=pyhton';">
+        pyhton
+    </button> 
+
+
+
+    <button type="button" 
+            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=git';">
+        git
     </button> 
 
 
 
 <hr>
 
-<p>We can define a domain-specific language (DSL) as a programming language specialized to a particular application domain.
-In this blog post we understand some key concepts and use cases inside the lines framework.</p>
+<h3> Matrix Transformations & Rendering 3D</h3>
 
-<p>An interface was needed for programable movement along lines. In this specific case a custom DSL
-allows to program simple instructions without understanding any of the inner working of the framework.</p>
+<p>
+    Transformations are at the core of any rendering engine. 
+    Vectors and matrices are the basic data structures that allow to
+    desgin and create functions to transform set of points 
+    in certain geometric way.
+</p>
 
-<p>There is a sharp definition between the general purpose language that host the framework and the
-domain specific language stored in scripts that can later be process. Encapsulating instructions in scripts 
-make this kind of code highly reusable along different components.</p>
+<h3> Points / Vectors / Matrices</h3>
+<p>
+    Both points and vectors are represented by a list of numbers, but they have different geometric interpretations.
+    Points are simple a defined position in a space but vectors represent a direction within that space.
+    Matrices are the best mathematical construct to apply transformations to the points and vectors, GPUs are highly optimized
+    to compute matrix multiplications in parallel.
+</p>
 
-<p>We are using an expression builder to construct the graph that represents a movement state machine.
-In this case we are not working with simple value assignments or defined instructions. 
-The DSL represents a complex data structure, expression builders need to be defined 
-for each new sentence.</p>
+<h3> What kind of operations are needed in the 3D space ? </h3>
 
-<p>Lets analyze a fluent API and the elements we are using here.</p>
+<p>Well, in any rendering engine, we require the following:</p>
 
-<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="n">ExpressionBuilder</span> <span class="n">builder</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">();</span>
+- translation
+- rotation
+- scale
 
-<span class="n">builder</span><span class="p">.</span><span class="nf">loop</span><span class="p">()</span>
-            <span class="p">.</span><span class="nf">times</span><span class="p">(</span><span class="m">5</span><span class="p">)</span>
-            <span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">()</span>
-                <span class="p">.</span><span class="nf">sequence</span><span class="p">()</span>
-                    <span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">().</span><span class="n">terminal</span><span class="p">&lt;</span><span class="n">MoveBuilder</span><span class="p">&gt;()</span>
-                            <span class="p">.</span><span class="nf">distance</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
-                        <span class="p">.</span><span class="nf">move_end</span><span class="p">()</span>
-                    <span class="p">)</span>
-                    <span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">().</span><span class="n">terminal</span><span class="p">&lt;</span><span class="n">MoveBuilder</span><span class="p">&gt;()</span>
-                            <span class="p">.</span><span class="nf">min</span><span class="p">(-</span><span class="m">5</span><span class="p">)</span>
-                            <span class="p">.</span><span class="nf">max</span><span class="p">(</span><span class="m">5</span><span class="p">)</span>
-                        <span class="p">.</span><span class="nf">move_end</span><span class="p">()</span>
-                    <span class="p">)</span>
-                    <span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">()</span>
-                        <span class="p">.</span><span class="nf">decide</span><span class="p">()</span>
-                            <span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="m">0.3f</span><span class="p">,</span> <span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">().</span><span class="n">terminal</span><span class="p">&lt;</span><span class="n">MoveBuilder</span><span class="p">&gt;()</span>
-                                    <span class="p">.</span><span class="nf">min</span><span class="p">(-</span><span class="m">8</span><span class="p">)</span>
-                                    <span class="p">.</span><span class="nf">max</span><span class="p">(</span><span class="m">8</span><span class="p">)</span>
-                                <span class="p">.</span><span class="nf">move_end</span><span class="p">()</span>
-                            <span class="p">)</span>
-                            <span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="m">0.7f</span><span class="p">,</span> <span class="k">new</span> <span class="nf">ExpressionBuilder</span><span class="p">().</span><span class="n">terminal</span><span class="p">&lt;</span><span class="n">MoveBuilder</span><span class="p">&gt;()</span>
-                                    <span class="p">.</span><span class="nf">distance</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>
-                                <span class="p">.</span><span class="nf">move_end</span><span class="p">()</span>
-                            <span class="p">)</span>
-                        <span class="p">.</span><span class="nf">decide_end</span><span class="p">()</span>
-                    <span class="p">)</span>
-                <span class="p">.</span><span class="nf">sequence_end</span><span class="p">()</span>
-            <span class="p">)</span>
-        <span class="p">.</span><span class="nf">loop_end</span><span class="p">()</span>
-    <span class="p">.</span><span class="nf">end</span><span class="p">();</span>
+<p> Keep reding the text and imagine that transformations are applied from the origin of the coordinate system (global coordinates), 
+    we'll consider local transformations later  </p>
 
-<span class="k">return</span> <span class="n">builder</span><span class="p">.</span><span class="nf">Generate</span><span class="p">();</span></code></pre></figure>
+<h3>4x4 Matrix in a 3D Space</h3>
 
-<p>This expression tree builds a complex graph State-Machine.
-The fluent interface allows to link instructions in a natural expressive way.
-Notice the difference between the terminal and non-terminal expressions.</p>
+<p> <a href="https://en.wikipedia.org/wiki/Homogeneous_coordinates">homogeneuos coordinates</a> are a system of coordinates used in projective geometry.
+    They have the advantage that the coordinates of points, including points at infinity, can be represented using finite coordinates.
+    Since translation is not a linear transformation we need to embed 3x3 matrices in a 4x4 matrices, <a href="https://en.wikipedia.org/wiki/Translation_(geometry)">find out why</a>
+</p>
 
-<ul>
-  <li>
-    <p>Terminal:
-  Represent the behavior we want to add to the graph.</p>
-  </li>
-  <li>
-    <p>Non-Terminal:
-  Integrate flow control with elements such as loop, sequences and decisions.</p>
-  </li>
-</ul>
+<h3> Basic Transformation Matrices</h3>
 
-<p>Fluent APIs are popular among DSL, according to Wikipedia a fluent API is a way of implementing 
-object oriented code with a more natural and human readable interface. 
-Method chaining is used to relay the instruction context of a subsequent expression.
-But there are more elements to consider in those concrete languages.</p>
+<p>
+For any given object we need to translate, rotate, and scale. Each one of this scene objects need to store transformation data in a 4x4 matrix. 
+The matrix multiplication allow to easily modify the transformation data the object stores.
+The following blocks of code create the most basic matrices in numpy arrays.
+</p>
 
-<ul>
-  <li>Method Chaining</li>
-  <li>Method Cascading</li>
-  <li>Progressive Interfaces</li>
-</ul>
+<h3>Model Matrix</h3>
 
+    <p>
+    A matrix is used to store the transformation of any object, but what about the points / vertices of that object in the case that 
+    it renders some kind of mesh ?
+    </p>
+
+    <p>Storing the transformation in the model matrix allows : </p>
+
+    <ul>
+        <li>- chain transformations by multiplying the model matrix of the object, the result matrix will store the acumulated transformatins.</li>
+        <li>- render a complex mesh without having to store the vertices of the mesh inside the object.</li>
+    </ul>
+
+<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">def init_Identity():
+
+    return np.array( [
+        [1, 0, 0, 0],
+        [0, 1, 0, 0],
+        [0 ,0, 1, 0],
+        [0, 0, 0, 1]
+    ]).astype(float)</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">def init_Translation(x,y,z):
+
+    return np.array( [
+        [1, 0, 0, x],
+        [0, 1, 0, y],
+        [0 ,0, 1, z],
+        [0, 0, 0, 1]
+    ]).astype(float)</code></pre></figure>
+
+<p>
+    The followings lines of code represent the rotation matrices for the x,y,z axes.
+    Rotation happens around an axis, and the rotation matrix does not move the axis.
+    Rotation can be produced arond any vector, but we are considering just the rotation around the 
+    basis vectors (axis) since other roations can be derived later from the world matrix.
+</p>
+
+<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">def init_RotationX(angle):
+
+    c = cos(angle)
+    s = sin(angle)
+
+    return np.array( [
+        [1, 0,  0, 0],
+        [0, c, -s, 0],
+        [0 ,s,  c, 0],
+        [0, 0,  0, 1]
+    ]).astype(float)
+
+def init_RotationY(angle):
+
+    c = cos(angle)
+    s = sin(angle)
+
+    return np.array( [
+        [ c, 0, s, 0],
+        [ 0, 1, 0, 0],
+        [-s ,0, c, 0],
+        [ 0, 0, 0, 1]
+    ]).astype(float)
+
+def init_RotationZ(angle):
+
+    c = cos(angle)
+    s = sin(angle)
+
+    return np.array( [
+        [c, -s, 0, 0],
+        [s, c, 0, 0],
+        [0 ,0, 1, 0],
+        [0, 0, 0, 1]
+    ]).astype(float)</code></pre></figure>
+
+<p>
+    This scale matrix only accepts one parameter scaling the object uniformly along the x,y, axes.
+</p>
+
+<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">def init_Scale(s):
+
+    return np.array( [
+        [s, 0, 0, 0],
+        [0, s, 0, 0],
+        [0 ,0, s, 0],
+        [0, 0, 0, 1]
+    ]).astype(float)</code></pre></figure>
+
+<h3> Local vs Global Coordinates </h3>
+
+<p>
+    When we multiply any of the previous matrices by some point we are transforming that point in a global coordinate system (Origin(0,0,0)). 
+    For example, when multiplying a point by the translation matrix the point moves along the basis x,y,z axis.
+    Local transformations requiere to define an internal local coordinate system. Origin, orientation, and scale of the
+    local coordinate axes are chosen for conviniece, but usually the center of the object is selected to transform locally.
+</p>
+
+<h3> How to use matrix multiplication to perform transformations in local coordinate systems </h3>
+
+    <p>
+        Let's keep it simple, in order to perform any global transformation we chain matrix multiplications on the left side of expression.
+        To achive local transformations just multiply on the right side of the expression. 
+        Keep in mind that matrix multiplication is not commutative: A*B != B*A 
+    </p>
+
+    <ul>
+        <li>Global Transformation: T3 * T2 * T1 * M(model_matrix)</li>
+        <li>Local Transformation: M(model_matrix) * T1 * T2 * T3</li>
+    </ul>
+
+<p>
+    Perspective matrix for rendering the scene.
+    Frustum: truncated pyramid that defines the visible region.
+    Parameters:
+        - near / far distance: 
+        - angle of view: the angle between fron and bottom frustom planes.
+        - aspect ratio: width / height of the rendered image.
+</p>
+
+<figure class="highlight"><pre><code class="language-pyhton" data-lang="pyhton">def init_Perspective(angleOfView=60, aspectRatio=1, near=0.1, far=1000):
+
+    #convert to radians
+    a = angleOfView *pi/180
+    d = 1.0 / tan(a/2)
+    r = aspectRatio
+    b = (far + near) / (near - far)
+    c =  2 * far * near / (near - far)
+
+    return np.array( [
+        [d/r, 0, 0, 0],
+        [0, d, 0, 0],
+        [0 ,0, b, c],
+        [0, 0, -1, 0]
+    ]).astype(float)</code></pre></figure>
 
 <!-- INCLUDE spline / procedural -->
 
@@ -591,7 +704,7 @@ But there are more elements to consider in those concrete languages.</p>
 <div class="post">
     <a href="https://waloncab.github.io/s.ln_blog/blog/bezier/spline/2021/11/20/Casteljau's-Algorithm.html">Casteljau's Algorithm</a>
     <p>2021-11-20 08:56:49 +0100</p>
-    <p>Sometimes you need to define n-point curves, and generic bezier may fit your needs in those cases. The following lines of code represent how to design a generic bezier curve, n-grade curve. This algorithm uses recursion to iterate throw the entire interpolation points. Parameters: * points: the vector containing the...</p>
+    <p>Sometimes you need to define n-point curves, and generic bezier may fit your needs in those cases. The following lines of code represent how to design a generic bezier curve, n-grade curve. This algorithm uses recursion to iterate throw the entire interpolation points. Parameters: points: the vector containing the curve...</p>
 </div>
             
         <br>
