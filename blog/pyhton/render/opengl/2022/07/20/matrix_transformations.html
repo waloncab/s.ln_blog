@@ -435,13 +435,6 @@
 
 
     <button type="button" 
-            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=jekyll';">
-        jekyll
-    </button> 
-
-
-
-    <button type="button" 
             onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=pyhton';">
         pyhton
     </button> 
@@ -449,21 +442,27 @@
 
 
     <button type="button" 
-            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=git';">
-        git
+            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=render';">
+        render
+    </button> 
+
+
+
+    <button type="button" 
+            onclick="window.location.href='https://waloncab.github.io/s.ln_blog/search.html?query=openGL';">
+        openGL
     </button> 
 
 
 
 <hr>
 
-<h3> Matrix Transformations & Rendering 3D</h3>
+<!-- <h3> Matrix Transformations & Rendering 3D</h3> -->
 
 <p>
     Transformations are at the core of any rendering engine. 
     Vectors and matrices are the basic data structures that allow to
-    desgin and create functions to transform set of points 
-    in certain geometric way.
+    desgin and create functions to transform set of points in certain geometric way.
 </p>
 
 <h3> Points / Vectors / Matrices</h3>
@@ -478,9 +477,11 @@
 
 <p>Well, in any rendering engine, we require the following:</p>
 
-- translation
-- rotation
-- scale
+<ul>
+    <li>- translation</li>
+    <li>- rotation</li>
+    <li>- scale</li>
+</ul>
 
 <p> Keep reding the text and imagine that transformations are applied from the origin of the coordinate system (global coordinates), 
     we'll consider local transformations later  </p>
@@ -597,7 +598,7 @@ def init_RotationZ(angle):
     local coordinate axes are chosen for conviniece, but usually the center of the object is selected to transform locally.
 </p>
 
-<h3> How to use matrix multiplication to perform transformations in local coordinate systems </h3>
+<h3> How to use matrix multiplication to perform transformations in Local Coordinate Systems </h3>
 
     <p>
         Let's keep it simple, in order to perform any global transformation we chain matrix multiplications on the left side of expression.
@@ -666,9 +667,9 @@ def init_RotationZ(angle):
         <link rel="stylesheet" href="https://waloncab.github.io/s.ln_blog/assets/css/post.css">
 
 <div class="post">
-    <a href="https://waloncab.github.io/s.ln_blog/blog/jekyll/pyhton/git/2022/07/20/matrix_transformations.html">Matrix Transformation for Rendering 3D objects</a>
+    <a href="https://waloncab.github.io/s.ln_blog/blog/pyhton/render/opengl/2022/07/20/matrix_transformations.html">Matrix Transformation for Rendering 3D objects</a>
     <p>2022-07-20 17:00:00 +0200</p>
-    <p>Matrix Transformations & Rendering 3D Transformations are at the core of any rendering engine. Vectors and matrices are the basic data structures that allow to desgin and create functions to transform set of points in certain geometric way. Points / Vectors / Matrices Both points and vectors are represented by...</p>
+    <p>Transformations are at the core of any rendering engine. Vectors and matrices are the basic data structures that allow to desgin and create functions to transform set of points in certain geometric way. Points / Vectors / Matrices Both points and vectors are represented by a list of numbers, but...</p>
 </div>
             
         <br>
